@@ -1,16 +1,19 @@
-﻿namespace devdeer.BookStore.Logic.Models
+﻿namespace devdeer.BookStore.Data.Entities
 {
+    using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel.DataAnnotations;
-    using Newtonsoft.Json;
+    using System.Text.Json.Serialization;
+    using devdeer.BookStore.Logic.Models;
 
     /// <summary>
-    /// An author model represented in-memory.
+    /// An author entity represented in the database.
     /// </summary>
-    public class AuthorModel : ISoftDelete, IVersioned
+    public class AuthorEntity : ISoftDelete, IVersioned
     {
         /// <summary>
-        /// Represents the unique identifier of the author in-memory.
+        /// Represents the unique identifier of the author in the database.
         /// </summary>
         [Column(nameof(Id), Order = 1)]
         [Key]
@@ -38,6 +41,7 @@
         [Column(nameof(Age), Order = 12)]
         [Required]
         public int Age { get; set; } = default;
+
         /// <summary>
         /// The birth date of the author.
         /// </summary>
@@ -58,7 +62,7 @@
         /// The books written by the author.
         /// </summary>
         /// <remarks>
-        /// Establishes an n to m relationship.
+        /// Establishes an m to m relationship.
         /// </remarks>
         [JsonIgnore]
         public required List<BookModel> Books { get; set; }

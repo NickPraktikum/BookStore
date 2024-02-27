@@ -1,29 +1,21 @@
-﻿namespace devdeer.BookStore.Logic.Models
+﻿namespace devdeer.BookStore.Data.Entities
 {
+    using System;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel.DataAnnotations;
-    using Newtonsoft.Json;
+    using devdeer.BookStore.Logic.Models;
 
     /// <summary>
-    /// A book model represented in in-memory.
+    /// A book entity represented in the database.
     /// </summary>
-    public class BookModel : ISoftDelete, IVersioned
+    public class BookEntity : ISoftDelete, IVersioned
     {
         /// <summary>
-        /// Represents the unique identifier of the book in-memory.
+        /// Represents the unique identifier of the book in the database.
         /// </summary>
         [Column(nameof(Id), Order = 1)]
         [Key]
         public long Id { get; set; }
-
-        /// <summary>
-        /// The id of the author in the database. 
-        /// </summary>
-        /// <remarks>
-        /// The foreign key referenced to the author entity (<see cref="Author"/>).
-        /// </remarks>
-        [Column(nameof(AuthorId), Order = 2)]
-        public long AuthorId { get; set; }
 
         /// <summary>
         /// The ISBN (International Standard Book Number) of the book.
@@ -77,10 +69,7 @@
         /// <summary>
         /// The author of the book
         /// </summary>
-        /// <remarks>
-        /// The relation between the <see cref="BookModel"/> and <see cref="AuthorModel"/> entities is established via the AuthorId property (<see cref="AuthorId"/>)
-        /// </remarks>
-        public required AuthorModel Author { get; set; }
+        public required List<AuthorEntity> Authors { get; set; }
 
     }
 }
