@@ -37,7 +37,7 @@
         /// </summary>
         [Column(nameof(Age), Order = 12)]
         [Required]
-        public int Age { get; set; } = default;
+        public int Age => (int)((DateTime.Now - BirthDate).TotalDays / 365.242199);
         /// <summary>
         /// The birth date of the author.
         /// </summary>

@@ -19,7 +19,7 @@
         /// <inheritdoc/>
         public async Task<AuthorModel> CreateAuthorAsync(CreateAuthorModel model)
         {
-            var author = new AuthorModel { Name = model.Name, Surname = model.Surname, Age = model.Age, BirthDate = model.BirthDate, Books = new List<BookModel>(), DeletedAt = null, IsDeleted = false, Version = 1};
+            var author = new AuthorModel { Name = model.Name, Surname = model.Surname, BirthDate = model.BirthDate, Books = new List<BookModel>(), DeletedAt = null, IsDeleted = false, Version = 1};
             await _context.Authors.AddAsync(author);
             await _context.SaveChangesAsync();
             return author;
@@ -86,7 +86,6 @@
             var author = await GetAuthorByIdAsync(id);
             author!.Name = model.Name;
             author.Surname = model.Surname;
-            author.Age = model.Age;
             author.BirthDate = model.BirthDate;
             await _context.SaveChangesAsync();
             return author;
