@@ -1,5 +1,6 @@
 ﻿namespace devdeer.BookStore.Logic.Repositories
 {
+    using AutoMapper;
     using devdeer.BookStore.Data.Contexts.v1;
     using devdeer.BookStore.Logic.Common.Exceptions;
     using devdeer.BookStore.Logic.Interfaces;
@@ -7,9 +8,11 @@
     using Microsoft.EntityFrameworkCore;
     public class VersionDisplayRepository : IVersionDisplayRepository
     {
-        public readonly BookStoreContext _context;
-        public VersionDisplayRepository(BookStoreContext context) { 
+        private readonly BookStoreContext _context;
+        private readonly IMapper _mapper;
+        public VersionDisplayRepository(BookStoreContext context, IMapper mapper) { 
             _context = context;
+            _mapper = mapper;
         }
 
         /// <inheritdoc/>
@@ -26,7 +29,8 @@
                 var authorChangeTime = authorChangedOn.LastOrDefault();
                 var authorAndBooks = await _context.Authors
             .TemporalAsOf(authorChangeTime.AddMilliseconds(-1)).IgnoreQueryFilters().Where(author => author.Id == id).FirstOrDefaultAsync();
-                return authorAndBooks!;
+                var authorModels = _mapper.Map<AuthorModel>(authorAndBooks);
+                return authorModels!;
             }
         }
 
@@ -42,7 +46,8 @@
                 var bookChangeTime = bookChangedOn.LastOrDefault();
                 var book = await _context.Books
                     .TemporalAsOf(bookChangeTime.AddMilliseconds(-1)).IgnoreQueryFilters().Where(book => book.Id == id).FirstOrDefaultAsync();
-                return book;
+                var bookModel = _mapper.Map<BookModel>(book);
+                return bookModel;
             }
 
         }

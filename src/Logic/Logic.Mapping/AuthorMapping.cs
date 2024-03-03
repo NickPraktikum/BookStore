@@ -6,7 +6,7 @@
     public class AuthorMapping : Profile
     {
         public AuthorMapping() {
-            CreateMap<AuthorEntity, AuthorModel>();
+            CreateMap<AuthorModel, AuthorEntity>();
         }
     }
 }

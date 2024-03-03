@@ -1,6 +1,8 @@
 ﻿namespace devdeer.BookStore.Logic.Repositories
 {
+    using AutoMapper;
     using devdeer.BookStore.Data.Contexts.v1;
+    using devdeer.BookStore.Data.Entities;
     using devdeer.BookStore.Logic.Common.Exceptions;
     using devdeer.BookStore.Logic.Interfaces;
     using devdeer.BookStore.Logic.Models;
@@ -11,33 +13,38 @@
     public class BookStoreRepository : IBookStoreRepository
     {
         private readonly BookStoreContext _context;
-        public BookStoreRepository(BookStoreContext context)
+        private readonly IMapper _mapper;
+        public BookStoreRepository(BookStoreContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         /// <inheritdoc/>
         public async Task<AuthorModel> CreateAuthorAsync(CreateAuthorModel model)
         {
-            var author = new AuthorModel { Name = model.Name, Surname = model.Surname, BirthDate = model.BirthDate, Books = new List<BookModel>(), DeletedAt = null, IsDeleted = false, Version = 1};
+            var authorModel = new AuthorModel { Name = model.Name, Surname = model.Surname, BirthDate = model.BirthDate, Books = new List<BookModel>(), DeletedAt = null, IsDeleted = false, Version = 1};
+            var author = _mapper.Map<AuthorEntity>(authorModel);
             await _context.Authors.AddAsync(author);
             await _context.SaveChangesAsync();
-            return author;
+            return authorModel;
         }
 
         /// <inheritdoc/>
         public async Task<BookModel?> CreateBookAsync(CreateBookModel model, AuthorModel authorModel)
         {
-            var book = new BookModel { Isbn = model.Isbn, Pages = model.Pages, AuthorId = model.AuthorId, Description = model.Description, Title = model.Title, Price = model.Price, IsDeleted = false, DeletedAt = null, Author = authorModel!, Version = 1 };
+            var bookModel = new BookModel { Isbn = model.Isbn, Pages = model.Pages, AuthorId = model.AuthorId, Description = model.Description, Title = model.Title, Price = model.Price, IsDeleted = false, DeletedAt = null, Author = authorModel!, Version = 1 };
+            var book = _mapper.Map<BookEntity>(bookModel);
             await _context.Books.AddAsync(book);
             await _context.SaveChangesAsync();
-            return book;
+            return bookModel;
         }
 
         /// <inheritdoc/>
         public async Task<bool> DeleteAuthorAsync(long id)
         {
-            var author = await GetAuthorByIdAsync(id);
+            var authorModel = await GetAuthorByIdAsync(id);
+            var author = _mapper.Map<AuthorEntity>(authorModel);
             _context.Authors.Remove(author!);
             await _context.SaveChangesAsync();
             return true;
@@ -46,7 +53,8 @@
         /// <inheritdoc/>
         public async Task<bool> DeleteBookAsync(long id)
         {
-            var book = await GetBookByIdAsync(id);
+            var bookModel = await GetBookByIdAsync(id);
+            var book = _mapper.Map<BookEntity>(bookModel);
             _context.Books.Remove(book!);
             await _context.SaveChangesAsync();
             return true;
@@ -55,29 +63,33 @@
         /// <inheritdoc/>
         public async Task<AuthorModel[]?> GetAllAvailableAuthorsAsync()
         {
-            var authors = await _context.Authors.ToArrayAsync();
-            return authors;
+            var authorEntities = await _context.Authors.ToArrayAsync();
+            var authorModels = _mapper.Map<AuthorModel[]>(authorEntities);
+            return authorModels;
         }
 
         /// <inheritdoc/>
         public async Task<BookModel[]?> GetAllAvailableBooksAsync()
         {
-            var books = await _context.Books.ToArrayAsync();
-            return books;
+            var bookEntities = await _context.Books.ToArrayAsync();
+            var bookModels = _mapper.Map<BookModel[]>(bookEntities);
+            return bookModels;
         }
 
         /// <inheritdoc/>
         public async Task<AuthorModel[]?> GetAllDeletedAuthorsAsync()
         {
-            var authors = await _context.Authors.IgnoreQueryFilters().Where((author) => author.IsDeleted == true).ToArrayAsync();
-            return authors;
+            var authorsEntities = await _context.Authors.IgnoreQueryFilters().Where((author) => author.IsDeleted == true).ToArrayAsync();
+            var authorModels = _mapper.Map<AuthorModel[]>(authorsEntities);
+            return authorModels;
         }
 
         /// <inheritdoc/>
         public async Task<BookModel[]?> GetAllDeletedBooksAsync()
         {
-            var books = await _context.Books.IgnoreQueryFilters().Where((book) => book.IsDeleted == true).ToArrayAsync();
-            return books;
+            var booksEntities = await _context.Books.IgnoreQueryFilters().Where((book) => book.IsDeleted == true).ToArrayAsync();
+            var bookModels = _mapper.Map<BookModel[]>(booksEntities);
+            return bookModels;
         }
 
         /// <inheritdoc/>
@@ -114,7 +126,8 @@
             {
                 throw new EntityNotFoundException("Such book doesn't exist");
             }
-            return book;
+            var bookModel = _mapper.Map<BookModel>(book);
+            return bookModel;
         }
 
         /// <inheritdoc/>
@@ -126,7 +139,8 @@
             {
                 throw new EntityNotFoundException("Such author doesn't exist");
             }
-            return author;
+            var authorModel = _mapper.Map<AuthorModel>(author);
+            return authorModel;
         }
     }
 }

@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Data\Data.Contexts\Data.Contexts.csproj" />
     <ProjectReference Include="..\Logic.Common\Logic.Common.csproj" />
     <ProjectReference Include="..\Logic.Models\Logic.Models.csproj" />

@@ -1,15 +1,16 @@
 ﻿namespace devdeer.BookStore.Data.Configurations
 {
+    using devdeer.BookStore.Data.Entities;
     using devdeer.BookStore.Logic.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
     /// <summary>
-    /// The configuration for the <see cref="AuthorModel"/> entity. The configuration filters out deleted entities, auto-includes <see cref="BookModel"/>s in the queries and creates a temporal table for the <see cref="AuthorModel"/> entity.
+    /// The configuration for the <see cref="AuthorEntity"/> entity. The configuration filters out deleted entities, auto-includes <see cref="BookModel"/>s in the queries and creates a temporal table for the <see cref="AuthorEntity"/> entity.
     /// </summary>
-    public class AuthorModelConfiguration : IEntityTypeConfiguration<AuthorModel>
+    public class AuthorEntityConfiguration : IEntityTypeConfiguration<AuthorEntity>
     {
-        public void Configure(EntityTypeBuilder<AuthorModel> builder)
+        public void Configure(EntityTypeBuilder<AuthorEntity> builder)
         {
 
             builder.HasQueryFilter(q => q.IsDeleted == false);

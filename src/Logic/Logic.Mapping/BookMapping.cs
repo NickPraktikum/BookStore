@@ -7,7 +7,7 @@
     public class BookMapping : Profile
     {
         public BookMapping() {
-            CreateMap<BookEntity, BookModel>();
+            CreateMap<BookModel, BookEntity>();
         }
     }
 }

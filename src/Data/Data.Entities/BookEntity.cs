@@ -69,7 +69,6 @@
         /// <summary>
         /// The author of the book
         /// </summary>
-        public required List<AuthorEntity> Authors { get; set; }
-
+        public required AuthorEntity Author { get; set; }
     }
 }
