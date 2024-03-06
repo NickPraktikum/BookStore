@@ -3,7 +3,6 @@
     using devdeer.BookStore.Data.Configurations;
     using devdeer.BookStore.Data.Entities;
     using devdeer.BookStore.Data.Interceptors;
-    using devdeer.BookStore.Logic.Models;
     using Microsoft.EntityFrameworkCore;
 
     /// <summary>
@@ -41,12 +40,12 @@
             {
                 x.HasIndex(i => i.Surname, "IX_Authors_Surname");
             });
-            modelBuilder.Entity<BookEntity>().ToTable(tb => tb.IsTemporal(ttb =>
+            modelBuilder.Entity<BookEntity>().ToTable("Books").ToTable(tb => tb.IsTemporal(ttb =>
             {
                 ttb.HasPeriodStart("BookCreation");
                 ttb.HasPeriodEnd("BookRemoval");
             }));
-            modelBuilder.Entity<AuthorEntity>().ToTable(tb => tb.IsTemporal(ttb =>
+            modelBuilder.Entity<AuthorEntity>().ToTable("Authors").ToTable(tb => tb.IsTemporal(ttb =>
             {
                 ttb.HasPeriodStart("AuthorCreation");
                 ttb.HasPeriodEnd("AuthorRemoval");

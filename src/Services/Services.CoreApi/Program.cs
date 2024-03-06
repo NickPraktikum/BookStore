@@ -8,6 +8,7 @@ using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text.Json;
 using devdeer.BookStore.Services.CoreApi.Middlewares;
+using devdeer.BookStore.Logic.Mappings;
 
 var policyName = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +18,6 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
 }).AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
-builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: policyName,
@@ -47,6 +47,7 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(BookMapping).Assembly, typeof(AuthorMapping).Assembly);
 builder.Services.AddTransient<IBookStoreLogic, BookStoreLogic>();
 builder.Services.AddTransient<IBookStoreRepository, BookStoreRepository>();
 builder.Services.AddTransient<IVersionDisplayRepository, VersionDisplayRepository>();

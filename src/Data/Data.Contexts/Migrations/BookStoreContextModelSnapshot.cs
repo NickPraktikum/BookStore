@@ -22,7 +22,7 @@ namespace devdeer.BookStore.Data.Contexts.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("devdeer.BookStore.Logic.Models.AuthorModel", b =>
+            modelBuilder.Entity("devdeer.BookStore.Data.Entities.AuthorEntity", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -31,11 +31,6 @@ namespace devdeer.BookStore.Data.Contexts.Migrations
                         .HasColumnOrder(1);
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int")
-                        .HasColumnName("Age")
-                        .HasColumnOrder(12);
 
                     b.Property<DateTime>("AuthorCreation")
                         .ValueGeneratedOnAddOrUpdate()
@@ -50,7 +45,7 @@ namespace devdeer.BookStore.Data.Contexts.Migrations
                     b.Property<DateTimeOffset>("BirthDate")
                         .HasColumnType("datetimeoffset")
                         .HasColumnName("BirthDate")
-                        .HasColumnOrder(13);
+                        .HasColumnOrder(12);
 
                     b.Property<DateTimeOffset?>("DeletedAt")
                         .HasColumnType("datetimeoffset")
@@ -60,7 +55,7 @@ namespace devdeer.BookStore.Data.Contexts.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit")
                         .HasColumnName("IsDeleted")
-                        .HasColumnOrder(14);
+                        .HasColumnOrder(13);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -99,7 +94,7 @@ namespace devdeer.BookStore.Data.Contexts.Migrations
                             }));
                 });
 
-            modelBuilder.Entity("devdeer.BookStore.Logic.Models.BookModel", b =>
+            modelBuilder.Entity("devdeer.BookStore.Data.Entities.BookEntity", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -110,9 +105,7 @@ namespace devdeer.BookStore.Data.Contexts.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<long>("AuthorId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("AuthorId")
-                        .HasColumnOrder(2);
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("BookCreation")
                         .ValueGeneratedOnAddOrUpdate()
@@ -192,9 +185,9 @@ namespace devdeer.BookStore.Data.Contexts.Migrations
                             }));
                 });
 
-            modelBuilder.Entity("devdeer.BookStore.Logic.Models.BookModel", b =>
+            modelBuilder.Entity("devdeer.BookStore.Data.Entities.BookEntity", b =>
                 {
-                    b.HasOne("devdeer.BookStore.Logic.Models.AuthorModel", "Author")
+                    b.HasOne("devdeer.BookStore.Data.Entities.AuthorEntity", "Author")
                         .WithMany("Books")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -203,7 +196,7 @@ namespace devdeer.BookStore.Data.Contexts.Migrations
                     b.Navigation("Author");
                 });
 
-            modelBuilder.Entity("devdeer.BookStore.Logic.Models.AuthorModel", b =>
+            modelBuilder.Entity("devdeer.BookStore.Data.Entities.AuthorEntity", b =>
                 {
                     b.Navigation("Books");
                 });

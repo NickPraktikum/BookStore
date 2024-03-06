@@ -26,6 +26,7 @@
     <ProjectReference Include="..\..\Data\Data.Contexts\Data.Contexts.csproj" />
     <ProjectReference Include="..\..\Logic\Logic.Common\Logic.Common.csproj" />
     <ProjectReference Include="..\..\Logic\Logic.Core\Logic.Core.csproj" />
+    <ProjectReference Include="..\..\Logic\Logic.Mapping\Logic.Mapping.csproj" />
     <ProjectReference Include="..\..\Logic\Logic.Models\Logic.Models.csproj" />
     <ProjectReference Include="..\..\Logic\Logic.Repositories\Logic.Repositories.csproj" />
   </ItemGroup>

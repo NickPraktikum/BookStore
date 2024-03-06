@@ -10,7 +10,7 @@
     /// <summary>
     /// An author entity represented in the database.
     /// </summary>
-    public class AuthorEntity : ISoftDelete, IVersioned
+    public class AuthorEntity : IVersioned, ISoftDelete
     {
         /// <summary>
         /// Represents the unique identifier of the author in the database.
@@ -36,21 +36,14 @@
         public string Surname { get; set; } = default!;
 
         /// <summary>
-        /// The age of the author.
-        /// </summary>
-        [Column(nameof(Age), Order = 12)]
-        [Required]
-        public int Age { get; set; } = default;
-
-        /// <summary>
         /// The birth date of the author.
         /// </summary>
-        [Column(nameof(BirthDate), Order = 13)]
+        [Column(nameof(BirthDate), Order = 12)]
         [Required]
         public DateTimeOffset BirthDate { get; set; } = default!;
 
         /// <inheritdoc/>
-        [Column(nameof(IsDeleted), Order = 14)]
+        [Column(nameof(IsDeleted), Order = 13)]
         [Required]
         public bool IsDeleted { get; set; } = false;
 
@@ -65,7 +58,7 @@
         /// Establishes an m to m relationship.
         /// </remarks>
         [JsonIgnore]
-        public required List<BookModel> Books { get; set; }
+        public required ICollection<BookEntity> Books { get; set; }
 
         /// <inheritdoc/>
         [Column(nameof(Version), Order = 15)]

@@ -13,11 +13,6 @@
         public string Surname { get; set; } = default!;
 
         /// <summary>
-        /// The age of the author.
-        /// </summary>
-        public int Age { get; set; }
-
-        /// <summary>
         /// The birth date of the author.
         /// </summary>
         public DateTimeOffset BirthDate { get; set; } = default!;
