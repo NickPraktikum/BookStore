@@ -6,7 +6,7 @@
     public class AuthorMapping : Profile
     {
         public AuthorMapping() {
-            CreateMap<AuthorModel, AuthorEntity>();
+            CreateMap<AuthorEntity, AuthorModel>().ForMember(dest => dest.Books, opt => opt.MapFrom(src => src.Books)).ReverseMap();
         }
     }
 }

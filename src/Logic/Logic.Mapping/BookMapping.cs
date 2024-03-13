@@ -7,7 +7,7 @@
     public class BookMapping : Profile
     {
         public BookMapping() {
-            CreateMap<BookModel, BookEntity>();
+            CreateMap<BookEntity, BookModel>().ReverseMap();
         }
     }
 }

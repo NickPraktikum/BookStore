@@ -45,7 +45,7 @@ namespace devdeer.BookStore.Data.Contexts.Migrations
                     b.Property<DateTimeOffset>("BirthDate")
                         .HasColumnType("datetimeoffset")
                         .HasColumnName("BirthDate")
-                        .HasColumnOrder(12);
+                        .HasColumnOrder(13);
 
                     b.Property<DateTimeOffset?>("DeletedAt")
                         .HasColumnType("datetimeoffset")
@@ -55,7 +55,7 @@ namespace devdeer.BookStore.Data.Contexts.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit")
                         .HasColumnName("IsDeleted")
-                        .HasColumnOrder(13);
+                        .HasColumnOrder(14);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -105,7 +105,9 @@ namespace devdeer.BookStore.Data.Contexts.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<long>("AuthorId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("AuthorId")
+                        .HasColumnOrder(2);
 
                     b.Property<DateTime>("BookCreation")
                         .ValueGeneratedOnAddOrUpdate()

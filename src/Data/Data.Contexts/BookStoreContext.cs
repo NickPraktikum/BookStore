@@ -40,16 +40,20 @@
             {
                 x.HasIndex(i => i.Surname, "IX_Authors_Surname");
             });
-            modelBuilder.Entity<BookEntity>().ToTable("Books").ToTable(tb => tb.IsTemporal(ttb =>
+            modelBuilder.Entity<BookEntity>().ToTable(tb => tb.IsTemporal(ttb =>
             {
                 ttb.HasPeriodStart("BookCreation");
                 ttb.HasPeriodEnd("BookRemoval");
             }));
-            modelBuilder.Entity<AuthorEntity>().ToTable("Authors").ToTable(tb => tb.IsTemporal(ttb =>
+            modelBuilder.Entity<AuthorEntity>().ToTable(tb => tb.IsTemporal(ttb =>
             {
                 ttb.HasPeriodStart("AuthorCreation");
                 ttb.HasPeriodEnd("AuthorRemoval");
             }));
+            modelBuilder.Entity<BookEntity>()
+            .HasOne(b => b.Author)
+            .WithMany(a => a.Books)
+            .IsRequired();
 
             modelBuilder.ApplyConfiguration(new AuthorEntityConfiguration());
             modelBuilder.ApplyConfiguration(new BookEntityConfiguration());

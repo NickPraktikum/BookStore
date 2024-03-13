@@ -63,7 +63,7 @@ builder.Services.AddDbContext<BookStoreContext>(
                     sqlServerOptions.MigrationsHistoryTable("MigrationHistory", "SystemData");
                     sqlServerOptions.CommandTimeout(20);
                 });
-                ;
+                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
 var app = builder.Build();
 if (app.Environment.IsDevelopment())

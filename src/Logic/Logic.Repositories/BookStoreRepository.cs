@@ -23,20 +23,21 @@
         /// <inheritdoc/>
         public async Task<AuthorModel> CreateAuthorAsync(CreateAuthorModel model)
         {
-            var authorModel = new AuthorModel { Name = model.Name, Surname = model.Surname, BirthDate = model.BirthDate, Books = new List<BookModel>(), DeletedAt = null, IsDeleted = false, Version = 1};
+            var authorModel = new AuthorModel { Name = model.Name, Surname = model.Surname, BirthDate = model.BirthDate, Books = new List<BookModel>(), DeletedAt = null, IsDeleted = false, Version = 1 };
             var author = _mapper.Map<AuthorEntity>(authorModel);
             await _context.Authors.AddAsync(author);
             await _context.SaveChangesAsync();
+            authorModel.Id = author.Id;
             return authorModel;
         }
 
         /// <inheritdoc/>
         public async Task<BookModel?> CreateBookAsync(CreateBookModel model, AuthorModel authorModel)
         {
-            var bookModel = new BookModel { Isbn = model.Isbn, Pages = model.Pages, AuthorId = model.AuthorId, Description = model.Description, Title = model.Title, Price = model.Price, IsDeleted = false, DeletedAt = null, Author = authorModel!, Version = 1 };
-            var book = _mapper.Map<BookEntity>(bookModel);
+            var book = new BookEntity { Isbn = model.Isbn, Pages = model.Pages, AuthorId = authorModel.Id, Description = model.Description, Title = model.Title, Price = model.Price, IsDeleted = false, DeletedAt = null, Version = 1 };
             await _context.Books.AddAsync(book);
             await _context.SaveChangesAsync();
+            var bookModel = _mapper.Map<BookModel>(book);
             return bookModel;
         }
 

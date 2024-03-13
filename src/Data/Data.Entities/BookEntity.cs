@@ -3,6 +3,8 @@
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel.DataAnnotations;
+    using devdeer.BookStore.Logic.Models;
+    using System.Text.Json.Serialization;
 
     /// <summary>
     /// A book entity represented in the database.
@@ -15,6 +17,15 @@
         [Column(nameof(Id), Order = 1)]
         [Key]
         public long Id { get; set; }
+
+        /// <summary>
+        /// The id of the author in the database. 
+        /// </summary>
+        /// <remarks>
+        /// The foreign key referenced to the author entity (<see cref="Author"/>).
+        /// </remarks>
+        [Column(nameof(AuthorId), Order = 2)]
+        public long AuthorId { get; set; }
 
         /// <summary>
         /// The ISBN (International Standard Book Number) of the book.
@@ -68,6 +79,10 @@
         /// <summary>
         /// The author of the book
         /// </summary>
-        public required AuthorEntity Author { get; set; }
+        /// <remarks>
+        /// The relation between the <see cref="BookEntity"/> and <see cref="AuthorEntity"/> entities is established via the AuthorId property (<see cref="AuthorId"/>)
+        /// </remarks>
+        [JsonIgnore]
+        public AuthorEntity? Author { get; set; }
     }
 }

@@ -92,6 +92,12 @@ namespace devdeer.BookStore.Data.Contexts.Migrations
                         .Annotation("SqlServer:TemporalHistoryTableSchema", null)
                         .Annotation("SqlServer:TemporalPeriodEndColumnName", "BookRemoval")
                         .Annotation("SqlServer:TemporalPeriodStartColumnName", "BookCreation"),
+                    AuthorId = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:IsTemporal", true)
+                        .Annotation("SqlServer:TemporalHistoryTableName", "BooksHistory")
+                        .Annotation("SqlServer:TemporalHistoryTableSchema", null)
+                        .Annotation("SqlServer:TemporalPeriodEndColumnName", "BookRemoval")
+                        .Annotation("SqlServer:TemporalPeriodStartColumnName", "BookCreation"),
                     Isbn = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false)
                         .Annotation("SqlServer:IsTemporal", true)
                         .Annotation("SqlServer:TemporalHistoryTableName", "BooksHistory")
@@ -135,12 +141,6 @@ namespace devdeer.BookStore.Data.Contexts.Migrations
                         .Annotation("SqlServer:TemporalPeriodEndColumnName", "BookRemoval")
                         .Annotation("SqlServer:TemporalPeriodStartColumnName", "BookCreation"),
                     DeletedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
-                        .Annotation("SqlServer:IsTemporal", true)
-                        .Annotation("SqlServer:TemporalHistoryTableName", "BooksHistory")
-                        .Annotation("SqlServer:TemporalHistoryTableSchema", null)
-                        .Annotation("SqlServer:TemporalPeriodEndColumnName", "BookRemoval")
-                        .Annotation("SqlServer:TemporalPeriodStartColumnName", "BookCreation"),
-                    AuthorId = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:IsTemporal", true)
                         .Annotation("SqlServer:TemporalHistoryTableName", "BooksHistory")
                         .Annotation("SqlServer:TemporalHistoryTableSchema", null)

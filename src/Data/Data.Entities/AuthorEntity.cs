@@ -38,12 +38,12 @@
         /// <summary>
         /// The birth date of the author.
         /// </summary>
-        [Column(nameof(BirthDate), Order = 12)]
+        [Column(nameof(BirthDate), Order = 13)]
         [Required]
         public DateTimeOffset BirthDate { get; set; } = default!;
 
         /// <inheritdoc/>
-        [Column(nameof(IsDeleted), Order = 13)]
+        [Column(nameof(IsDeleted), Order = 14)]
         [Required]
         public bool IsDeleted { get; set; } = false;
 
@@ -55,10 +55,10 @@
         /// The books written by the author.
         /// </summary>
         /// <remarks>
-        /// Establishes an m to m relationship.
+        /// Establishes an n to m relationship.
         /// </remarks>
         [JsonIgnore]
-        public required ICollection<BookEntity> Books { get; set; }
+        public required List<BookEntity> Books { get; set; }
 
         /// <inheritdoc/>
         [Column(nameof(Version), Order = 15)]
