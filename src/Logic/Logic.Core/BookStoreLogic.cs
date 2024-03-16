@@ -1,5 +1,6 @@
 ﻿namespace devdeer.BookStore.Logic.Core
 {
+    using devdeer.BookStore.Data.Entities;
     using devdeer.BookStore.Logic.Common.Exceptions;
     using devdeer.BookStore.Logic.Interfaces;
     using devdeer.BookStore.Logic.Models;

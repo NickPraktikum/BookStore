@@ -96,28 +96,28 @@
         /// <inheritdoc/>
         public async Task<AuthorModel> UpdateAuthorAsync(long id, UpdateAuthorModel model)
         {
-            var author = await _context.Authors.FirstOrDefaultAsync(author => author.Id == id);
+            var author = await GetAuthorByIdAsync(id);
             author!.Name = model.Name;
             author.Surname = model.Surname;
             author.BirthDate = model.BirthDate;
             await _context.SaveChangesAsync();
-            AuthorModel authorModel = null;
+            var authorModel = _mapper.Map<AuthorModel>(author);
             return authorModel;
         }
 
         /// <inheritdoc/>
         public async Task<BookModel> UpdateBookAsync(long id, UpdateBookModel model, AuthorModel author)
         {
-            var book = await GetBookByIdAsync(id);
-            book!.AuthorId = model.AuthorId;
+            var book = _mapper.Map<BookEntity>(await GetBookByIdAsync(id));
+            book.AuthorId = model.AuthorId;
             book.Isbn = model.Isbn;
             book.Pages = model.Pages;
             book.Price = model.Price;
             book.Title = model.Title;
             book.Description = model.Description;
-            book.Author = author!;
             await _context.SaveChangesAsync();
-            return book;
+            var bookModel = _mapper.Map<BookModel>(book);
+            return bookModel;
         }
 
         /// <inheritdoc/>

@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Data\Data.Entities\Data.Entities.csproj" />
     <ProjectReference Include="..\Logic.Models\Logic.Models.csproj" />
   </ItemGroup>
 

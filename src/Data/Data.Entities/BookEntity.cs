@@ -4,11 +4,12 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel.DataAnnotations;
     using System.Text.Json.Serialization;
+    using devdeer.BookStore.Logic.Models;
 
     /// <summary>
     /// A book entity represented in the database.
     /// </summary>
-    public class BookEntity
+    public class BookEntity : IVersioned, ISoftDelete
     {
         /// <summary>
         /// Represents the unique identifier of the book in the database.

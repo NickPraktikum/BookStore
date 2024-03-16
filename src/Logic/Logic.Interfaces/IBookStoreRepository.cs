@@ -1,5 +1,6 @@
 ﻿namespace devdeer.BookStore.Logic.Interfaces
 {
+    using devdeer.BookStore.Data.Entities;
     using devdeer.BookStore.Logic.Models;
     using devdeer.BookStore.Logic.Models.CreateModels;
     using devdeer.BookStore.Logic.Models.UpdateModels;

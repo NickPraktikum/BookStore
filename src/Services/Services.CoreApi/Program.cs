@@ -18,6 +18,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
 }).AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
+builder.Services.AddAutoMapper(typeof(BookMapping).Assembly, typeof(AuthorMapping).Assembly);
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: policyName,
@@ -47,7 +48,6 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 builder.Services.AddSwaggerGen();
-builder.Services.AddAutoMapper(typeof(BookMapping).Assembly, typeof(AuthorMapping).Assembly);
 builder.Services.AddTransient<IBookStoreLogic, BookStoreLogic>();
 builder.Services.AddTransient<IBookStoreRepository, BookStoreRepository>();
 builder.Services.AddTransient<IVersionDisplayRepository, VersionDisplayRepository>();
@@ -63,7 +63,6 @@ builder.Services.AddDbContext<BookStoreContext>(
                     sqlServerOptions.MigrationsHistoryTable("MigrationHistory", "SystemData");
                     sqlServerOptions.CommandTimeout(20);
                 });
-                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
 var app = builder.Build();
 if (app.Environment.IsDevelopment())

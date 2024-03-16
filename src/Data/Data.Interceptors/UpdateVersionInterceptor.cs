@@ -24,21 +24,10 @@
             }
             return result;
         }
-        public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
+        public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
         {
-            var modifiedEntries = eventData.Context!.ChangeTracker.Entries()
-                .Where(entry => entry.State == EntityState.Modified | entry.State == EntityState.Deleted);
-
-            foreach (var entry in modifiedEntries)
-            {
-                if (entry.Entity is IVersioned versionedEntity)
-                {
-                    versionedEntity.Version++;
-                }
-            }
-
-            await Task.CompletedTask;
-            return result;
+            SavingChanges(eventData, result);
+            return ValueTask.FromResult(result);
         }
     }
 }
