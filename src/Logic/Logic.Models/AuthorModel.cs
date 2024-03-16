@@ -1,7 +1,5 @@
 ﻿namespace devdeer.BookStore.Logic.Models
 {
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.ComponentModel.DataAnnotations;
     using Newtonsoft.Json;
 
     /// <summary>

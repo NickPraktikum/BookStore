@@ -96,12 +96,13 @@
         /// <inheritdoc/>
         public async Task<AuthorModel> UpdateAuthorAsync(long id, UpdateAuthorModel model)
         {
-            var author = await GetAuthorByIdAsync(id);
+            var author = await _context.Authors.FirstOrDefaultAsync(author => author.Id == id);
             author!.Name = model.Name;
             author.Surname = model.Surname;
             author.BirthDate = model.BirthDate;
             await _context.SaveChangesAsync();
-            return author;
+            AuthorModel authorModel = null;
+            return authorModel;
         }
 
         /// <inheritdoc/>

@@ -61,6 +61,5 @@
 
         public DbSet<AuthorEntity> Authors { get; set; }
         public DbSet<BookEntity> Books { get; set; }
-
     }
 }

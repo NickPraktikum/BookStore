@@ -3,7 +3,6 @@
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel.DataAnnotations;
-    using devdeer.BookStore.Logic.Models;
     using System.Text.Json.Serialization;
 
     /// <summary>
