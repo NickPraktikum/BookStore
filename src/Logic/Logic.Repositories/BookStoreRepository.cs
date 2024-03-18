@@ -32,9 +32,9 @@
         }
 
         /// <inheritdoc/>
-        public async Task<BookModel?> CreateBookAsync(CreateBookModel model, AuthorModel authorModel)
+        public async Task<BookModel?> CreateBookAsync(CreateBookModel model, AuthorEntity authorModel)
         {
-            var book = new BookEntity { Isbn = model.Isbn, Pages = model.Pages, AuthorId = authorModel.Id, Description = model.Description, Title = model.Title, Price = model.Price, IsDeleted = false, DeletedAt = null, Version = 1 };
+            var book = new BookEntity { Isbn = model.Isbn, Pages = model.Pages, AuthorId = authorModel.Id, Description = model.Description, Title = model.Title, Price = model.Price, IsDeleted = false, DeletedAt = null, Version = 1, Author = null};
             await _context.Books.AddAsync(book);
             await _context.SaveChangesAsync();
             var bookModel = _mapper.Map<BookModel>(book);
@@ -46,6 +46,7 @@
         {
             var authorModel = await GetAuthorByIdAsync(id);
             var author = _mapper.Map<AuthorEntity>(authorModel);
+            _context.Entry(author).State = EntityState.Modified;
             _context.Authors.Remove(author!);
             await _context.SaveChangesAsync();
             return true;
@@ -56,11 +57,11 @@
         {
             var bookModel = await GetBookByIdAsync(id);
             var book = _mapper.Map<BookEntity>(bookModel);
+            _context.Entry(book).State = EntityState.Modified;
             _context.Books.Remove(book!);
             await _context.SaveChangesAsync();
             return true;
         }
-
         /// <inheritdoc/>
         public async Task<AuthorModel[]?> GetAllAvailableAuthorsAsync()
         {
@@ -106,9 +107,9 @@
         }
 
         /// <inheritdoc/>
-        public async Task<BookModel> UpdateBookAsync(long id, UpdateBookModel model, AuthorModel author)
+        public async Task<BookModel> UpdateBookAsync(long id, UpdateBookModel model, AuthorEntity author)
         {
-            var book = _mapper.Map<BookEntity>(await GetBookByIdAsync(id));
+            var book = await GetBookByIdAsync(id);
             book.AuthorId = model.AuthorId;
             book.Isbn = model.Isbn;
             book.Pages = model.Pages;
@@ -121,19 +122,18 @@
         }
 
         /// <inheritdoc/>
-        public async Task<BookModel> GetBookByIdAsync(long id)
+        public async Task<BookEntity> GetBookByIdAsync(long id)
         {
             var book = await _context.Books.FirstOrDefaultAsync(book => book.Id == id);
             if (book == null)
             {
                 throw new EntityNotFoundException("Such book doesn't exist");
             }
-            var bookModel = _mapper.Map<BookModel>(book);
-            return bookModel;
+            return book;
         }
 
         /// <inheritdoc/>
-        public async Task<AuthorModel> GetAuthorByIdAsync(long id)
+        public async Task<AuthorEntity> GetAuthorByIdAsync(long id)
         {
 
             var author = await _context.Authors.FirstOrDefaultAsync(author => author.Id == id);
@@ -141,8 +141,7 @@
             {
                 throw new EntityNotFoundException("Such author doesn't exist");
             }
-            var authorModel = _mapper.Map<AuthorModel>(author);
-            return authorModel;
+            return author;
         }
     }
 }

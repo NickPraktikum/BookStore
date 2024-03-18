@@ -72,13 +72,13 @@ namespace devdeer.BookStore.Logic.Interfaces
         /// </summary>
         /// <param name="id">The id of the book in the database.</param>
         /// <returns>The data of the retrieved book.</returns>
-        Task<BookModel> GetBookByIdAsync(long id);
+        Task<BookEntity> GetBookByIdAsync(long id);
         /// <summary>
         /// Retrieves an author by a provided id.
         /// </summary>
         /// <param name="id">The id of the author in the database.</param>
         /// <returns>The data of the retrieved author.</returns>
-        Task<AuthorModel> GetAuthorByIdAsync(long id);
+        Task<AuthorEntity> GetAuthorByIdAsync(long id);
         /// <summary>
         /// Retrieves the specified version of the author by the provided id.
         /// </summary>

@@ -1,7 +1,7 @@
-﻿using System.Text.Json.Serialization;
-
-namespace devdeer.BookStore.Logic.Models
+﻿namespace devdeer.BookStore.Logic.Models
 {
+    using System.Text.Json.Serialization;
+
     /// <summary>
     /// A book model represented in in-memory.
     /// </summary>
@@ -61,7 +61,7 @@ namespace devdeer.BookStore.Logic.Models
         /// The relation between the <see cref="BookModel"/> and <see cref="AuthorModel"/> entities is established via the AuthorId property (<see cref="AuthorId"/>)
         /// </remarks>
         [JsonIgnore]
-        public required AuthorModel Author { get; set; }
+        public AuthorModel? Author { get; set; }
 
     }
 }

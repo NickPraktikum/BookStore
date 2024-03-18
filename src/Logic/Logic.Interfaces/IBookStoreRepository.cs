@@ -16,7 +16,7 @@
         /// <param name="model">The metadata needed for the book creation.</param>
         /// <param name="authorModel">The metadata of the author of the book.</param>
         /// <returns>The data of the created book.</returns>
-        Task<BookModel?> CreateBookAsync(CreateBookModel model, AuthorModel authorModel);
+        Task<BookModel?> CreateBookAsync(CreateBookModel model, AuthorEntity authorModel);
         /// <summary>
         /// Creates a new author in the database.
         /// </summary>
@@ -69,18 +69,18 @@
         /// <param name="model">The model of the updated version of the book.</param>
         /// <param name="authorModel">The model of the author of the updated book.</param>
         /// <returns>The data of the updated book.</returns>
-        Task<BookModel> UpdateBookAsync(long id, UpdateBookModel model, AuthorModel author);
+        Task<BookModel> UpdateBookAsync(long id, UpdateBookModel model, AuthorEntity author);
         /// <summary>
         /// Retrieves a single book by a provided id.
         /// </summary>
         /// <param name="id">The id of the book in the database.</param>
         /// <returns>The data of the retrieved book.</returns>
-        Task<BookModel> GetBookByIdAsync(long id);
+        Task<BookEntity> GetBookByIdAsync(long id);
         /// <summary>
         /// Retrieves an author by a provided id.
         /// </summary>
         /// <param name="id">The id of the author in the database.</param>
         /// <returns>The data of the retrieved author.</returns>
-        Task<AuthorModel> GetAuthorByIdAsync(long id);
+        Task<AuthorEntity> GetAuthorByIdAsync(long id);
     }
 }

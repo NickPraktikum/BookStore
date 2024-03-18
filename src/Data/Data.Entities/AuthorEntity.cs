@@ -58,7 +58,7 @@
         /// Establishes an n to m relationship.
         /// </remarks>
         [JsonIgnore]
-        public required List<BookEntity> Books { get; set; }
+        public List<BookEntity>? Books { get; set; }
 
         /// <inheritdoc/>
         [Column(nameof(Version), Order = 15)]

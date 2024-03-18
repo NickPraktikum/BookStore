@@ -97,13 +97,13 @@
         }
 
         /// <inheritdoc/>
-        public async Task<AuthorModel> GetAuthorByIdAsync(long id)
+        public async Task<AuthorEntity> GetAuthorByIdAsync(long id)
         {
             return await _repository.GetAuthorByIdAsync(id);
         }
 
         /// <inheritdoc/>
-        public async Task<BookModel> GetBookByIdAsync(long id)
+        public async Task<BookEntity> GetBookByIdAsync(long id)
         {
             return await _repository.GetBookByIdAsync(id);
         }
