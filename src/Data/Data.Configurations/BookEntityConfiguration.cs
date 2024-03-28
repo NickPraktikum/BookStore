@@ -13,7 +13,7 @@
         {
 
             builder.HasQueryFilter(q => q.IsDeleted == false);
-            builder.Navigation(e => e.Author).AutoInclude();
+            builder.Navigation(book => book.Author).AutoInclude();
             builder.ToTable("Books", tb => tb.IsTemporal(ttb =>
             {
                 ttb.HasPeriodStart("BookCreation");

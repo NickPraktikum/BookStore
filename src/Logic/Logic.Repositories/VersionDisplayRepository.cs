@@ -22,7 +22,7 @@
                 .TemporalAll().IgnoreQueryFilters().Where(author => author.Id == id).OrderBy(author => EF.Property<DateTime>(author, "AuthorRemoval")).Where(author => author.Version == version).Select(author => EF.Property<DateTime>(author, "AuthorRemoval")).ToListAsync();
             if (authorChangedOn.Count == 0)
             {
-                throw new EntityNotFoundException("Such book wasn't found!");
+                throw new EntityNotFoundException("Such author wasn't found!");
             }
             else
             {
@@ -39,17 +39,19 @@
         {
             var bookChangedOn = await _context.Books
                 .TemporalAll().IgnoreQueryFilters().Where(book => book.Id == id).OrderBy(book => EF.Property<DateTime>(book, "BookRemoval")).Where(book => book.Version == version).Select(book => EF.Property<DateTime>(book, "BookRemoval")).ToListAsync();
-            if(bookChangedOn.Count == 0)
+            if (bookChangedOn.Count == 0)
             {
                 throw new EntityNotFoundException("Such book wasn't found!");
-            }else{
+            }
+            else
+            {
                 var bookChangeTime = bookChangedOn.LastOrDefault();
                 var book = await _context.Books
                     .TemporalAsOf(bookChangeTime.AddMilliseconds(-1)).IgnoreQueryFilters().Where(book => book.Id == id).FirstOrDefaultAsync();
                 var bookModel = _mapper.Map<BookModel>(book);
+                bookModel!.Author!.Books = null!;
                 return bookModel;
             }
-
         }
     }
 }

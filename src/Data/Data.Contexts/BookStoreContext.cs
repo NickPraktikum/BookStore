@@ -12,9 +12,7 @@
     {
         #region constructors and destructors
 
-        public BookStoreContext(DbContextOptions<BookStoreContext> options) : base(options)
-        {
-        }
+        public BookStoreContext(DbContextOptions<BookStoreContext> options) : base(options){}
 
         #endregion
 

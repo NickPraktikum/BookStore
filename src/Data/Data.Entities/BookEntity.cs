@@ -25,7 +25,7 @@
         /// The foreign key referenced to the author entity (<see cref="Author"/>).
         /// </remarks>
         [Column(nameof(AuthorId), Order = 2)]
-        public long AuthorId { get; set; }
+        public virtual long AuthorId { get; set; }
 
         /// <summary>
         /// The ISBN (International Standard Book Number) of the book.
@@ -82,7 +82,8 @@
         /// <remarks>
         /// The relation between the <see cref="BookEntity"/> and <see cref="AuthorEntity"/> entities is established via the AuthorId property (<see cref="AuthorId"/>)
         /// </remarks>
-        [JsonIgnore]
-        public AuthorEntity? Author { get; set; }
+        
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public virtual AuthorEntity? Author { get; set; }
     }
 }

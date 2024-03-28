@@ -60,8 +60,8 @@
         /// <remarks>
         /// The relation between the <see cref="BookModel"/> and <see cref="AuthorModel"/> entities is established via the AuthorId property (<see cref="AuthorId"/>)
         /// </remarks>
-        [JsonIgnore]
+       
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public AuthorModel? Author { get; set; }
-
     }
 }

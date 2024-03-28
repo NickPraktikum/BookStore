@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Text.Json;
 using devdeer.BookStore.Services.CoreApi.Middlewares;
 using devdeer.BookStore.Logic.Mappings;
+using System.Text.Json.Serialization;
 
 var policyName = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,8 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
     options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.WriteIndented = true;
 });
 builder.Services.AddAutoMapper(typeof(BookMapping).Assembly, typeof(AuthorMapping).Assembly);
 builder.Services.AddCors(options =>

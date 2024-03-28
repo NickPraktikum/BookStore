@@ -1,11 +1,13 @@
 ﻿namespace devdeer.BookStore.Services.CoreApi.Controllers.v1
 {
+    using devdeer.BookStore.Data.Entities;
     using devdeer.BookStore.Logic.Interfaces;
     using devdeer.BookStore.Logic.Models;
     using devdeer.BookStore.Logic.Models.CreateModels;
     using devdeer.BookStore.Logic.Models.UpdateModels;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.IdentityModel.Tokens;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// Provides endpoints to handle book store data.
@@ -116,7 +118,7 @@
         /// <response code="200">At least 1 deleted book was retrieved successfully.</response>
         /// <response code="404">No deleted books were found.</response>
         [HttpGet("Book/Deleted")]
-        public async Task<ActionResult<IEnumerable<BookModel[]?>>> GetAllDeletedBooks()
+        public async Task<ActionResult<IEnumerable<BookModel>?>> GetAllDeletedBooks()
         {
             var result = await Logic.GetAllDeletedBooksAsync();
             return result.IsNullOrEmpty() ? NotFound() : Ok(result);
@@ -169,7 +171,7 @@
         /// <response code="200">The book was found successfully.</response>
         /// <response code="400">The book couldn't be retrieved.</response>
         [HttpGet("Book/{id}")]
-        public async Task<ActionResult<BookModel>> GetBookById(long id)
+        public async Task<ActionResult<BookEntity?>> GetBookById(long id)
         {
             var result = await Logic.GetBookByIdAsync(id);
             return result == null ? NotFound() : Ok(result);
@@ -182,7 +184,7 @@
         /// <response code="200">The author was found successfully.</response>
         /// <response code="400">The author couldn't be retrieved.</response>
         [HttpGet("Author/{id}")]
-        public async Task<ActionResult<AuthorModel>> GetAuthorById(long id)
+        public async Task<ActionResult<AuthorEntity?>> GetAuthorById(long id)
         {
             var result = await Logic.GetAuthorByIdAsync(id);
             return result == null ? NotFound() : Ok(result);
@@ -196,7 +198,7 @@
         /// <response code="200">The author was found successfully.</response>
         /// <response code="400">The author couldn't be retrieved.</response>
         [HttpGet("Author/{id}/{version}")]
-        public async Task<ActionResult<AuthorModel>> GetAuthorByVersion(long id, int version)
+        public async Task<ActionResult<AuthorModel?>> GetAuthorByVersion(long id, int version)
         {
             var result = await Logic.GetAuthorByVersionAsync(id, version);
             return result == null ? NotFound() : Ok(result);
@@ -210,7 +212,7 @@
         /// <response code="200">The book was found successfully.</response>
         /// <response code="400">The book couldn't be retrieved.</response>
         [HttpGet("Book/{id}/{version}")]
-        public async Task<ActionResult<BookModel>> GetBookByVersion(long id, int version)
+        public async Task<ActionResult<BookModel?>> GetBookByVersion(long id, int version)
         {
             var result = await Logic.GetBookByVersionAsync(id, version);
             return result == null ? NotFound() : Ok(result);

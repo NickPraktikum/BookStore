@@ -1,6 +1,6 @@
 ﻿namespace devdeer.BookStore.Logic.Models
 {
-    using Newtonsoft.Json;
+    using System.Text.Json.Serialization;
 
     /// <summary>
     /// An author model represented in-memory.
@@ -43,8 +43,9 @@
         /// <remarks>
         /// Establishes an n to m relationship.
         /// </remarks>
-        [JsonIgnore]
-        public required List<BookModel> Books { get; set; }
+        
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        public ICollection<BookModel>? Books { get; set; }
 
         /// <inheritdoc/>
         public int Version { get; set; } = 1;
