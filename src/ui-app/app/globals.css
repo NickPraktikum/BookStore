@@ -1,9 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
 
 @layer utilities {
+  html {
+    scroll-behavior: smooth;
+  }
   .text-balance {
     text-wrap: balance;
+  }
+  .source-code-pro {
+    font-family: "Source Code Pro", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
+  }
+  .scrolling-wrapper {
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }

@@ -40,7 +40,7 @@
             await _context.Books.AddAsync(book);
             await _context.SaveChangesAsync();
             var bookModel = _mapper.Map<BookModel>(book);
-            bookModel.Author.Books = null!;
+            bookModel!.Author!.Books = null!;
             return bookModel;
         }
 
@@ -84,7 +84,7 @@
             var bookModels = _mapper.Map<BookModel[]>(bookEntities);
             foreach(var book in bookModels)
             {
-                book.Author.Books = null!;
+                book!.Author!.Books = null!;
             }
             return bookModels;
         }
@@ -136,7 +136,7 @@
             book.Description = model.Description;
             await _context.SaveChangesAsync();
             var bookModel = _mapper.Map<BookModel>(book);
-            bookModel.Author.Books = null!;
+            bookModel!.Author!.Books = null!;
             return bookModel;
         }
 

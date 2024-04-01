@@ -1,31 +1,19 @@
 import { FunctionComponent } from "react";
+import { IBookProps } from "../interfaces/IBookProps";
 
-const Book: FunctionComponent<{ book: IBookModel }> = ({ book }) => {
+const Book: FunctionComponent<IBookProps> = ({ id, ISBN, title, version }) => {
   return (
-    <div className="w-[277px] h-[327px] bg-white rounded-xl flex justify-center items-center flex-col">
-      <div className="mb-[10px]">
-        <h3 className="mb-[4px] text-[#181818] font-medium text-lg">Book</h3>
-        <p className="text-[#666666] font-normal text-sm">{book.title}</p>
-      </div>
-      <div className="flex justify-around items-center flex-column flex-wrap p-4 text-[#666666] font-normal text-sm">
-        <div className="flex justify-center items-center w-[50%] text-center border-r-2 py-3">
-          <p>Id: {book.id}</p>
-        </div>
-        <div className="flex justify-center items-center w-[50%] text-center py-3">
-          <p>ISBN: {book.isbn}</p>
-        </div>
-        <div className="flex justify-center items-center w-[50%] text-center border-r-2 py-3">
-          <p>Version: {book.version}</p>
-        </div>
-        <div className="flex justify-center items-center w-[50%] text-center  py-3">
-          <p>
-            Author: <br></br>
-            {book.author.name} {book.author.surname}
-          </p>
-        </div>
-        <div className="flex justify-center items-center w-[50%] text-center py-3">
-          <p>IsDeleted: {book.isDeleted.toString()}</p>
-        </div>
+    <div
+      className="flex justify-center items-center flex-col w-[81px] h-[104px] bg-[#FDF397] border border-black rounded-lg drop-shadow-md 
+     source-code-pro flex-shrink-0 flex-grow-0 flex-basis-auto"
+    >
+      <h6 className="font-medium text-[12px] mb-[4px] text-[#181818] ">
+        {title}
+      </h6>
+      <div className="font-normal text-[9px] flex items-center flex-col gap-[2px] text-[#666666]">
+        <p>{id}</p>
+        <p>{ISBN}</p>
+        <p>{version}</p>
       </div>
     </div>
   );

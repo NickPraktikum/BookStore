@@ -1,24 +1,22 @@
-"use client";
-import { FetchAuthorVersion } from "@/app/functions/FetchAuthorVersion";
-import { FetchAvailableAuthors } from "@/app/functions/FetchAvailableAuthors";
-import { FetchAvailableBooks } from "@/app/functions/FetchAvailableBooks";
-import Book from "./Book";
 import { FunctionComponent } from "react";
-import { FetchDeletedBooks } from "../functions/FetchDeletedBooks";
-import Loading from "./Loading";
-import ErrorMessage from "./Error";
-const Books: FunctionComponent<{ state: EntityStates }> = ({ state }) => {
-  const { data, isLoading, isError, error, isFetching } =
-    state == "available" ? FetchAvailableBooks() : FetchDeletedBooks();
+import { FetchAvailableBooks } from "../functions/FetchAvailableBooks";
+import Book from "./Book";
+import { IBooksElement } from "../interfaces/IBooksElement";
+
+const Books: FunctionComponent<IBooksElement> = ({ books }) => {
   return (
-    <div className="flex justify-around gap-[69px] flex-wrap py-[50px]">
-      {data != null && !isFetching && !isError
-        ? data.map((book: IBookModel, index: number) => {
-            return <Book book={book} key={index} />;
-          })
-        : null}
-      {isFetching ? <Loading /> : null}
-      {isError && !isFetching ? <ErrorMessage message={error.message} /> : null}
+    <div className="flex gap-3 whitespace-nowrap overflow-x-auto overflow-y-hidden flex-shrink-0 flex-grow-0 flex-basis-auto scrolling-wrapper mx-[20px] pb-5">
+      {books?.map((v: IBookModel, index: number) => {
+        return (
+          <Book
+            key={index}
+            id={v.id}
+            ISBN={v.isbn}
+            title={v.title}
+            version={v.version}
+          />
+        );
+      })}
     </div>
   );
 };

@@ -1,4 +1,9 @@
 {
+  "/not-found": "app/not-found.js",
+  "/deleted-books/page": "app/deleted-books/page.js",
   "/page": "app/page.js",
-  "/version/page": "app/version/page.js"
+  "/book-by-id/[book]/page": "app/book-by-id/[book]/page.js",
+  "/author-by-id/[author]/page": "app/author-by-id/[author]/page.js",
+  "/available-authors/page": "app/available-authors/page.js",
+  "/deleted-authors/page": "app/deleted-authors/page.js"
 }
