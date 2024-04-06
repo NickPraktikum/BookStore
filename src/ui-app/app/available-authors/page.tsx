@@ -1,3 +1,4 @@
+import Authors from "../components/Authors";
 import Books from "../components/Books";
 
 export default async function Deleted() {
@@ -12,7 +13,7 @@ export default async function Deleted() {
           className="w-[186px] h-[39px] bg-[#ECECEC] placeholder:text-black placeholder:font-medium rounded-lg drop-shadow-md shadow-md"
         />
       </div>
-      <Books books={data} />
+      <Authors authors={data} />
     </main>
   );
 }
