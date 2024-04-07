@@ -39,6 +39,20 @@ const Navigation: FunctionComponent = () => {
             link="/author-by-id"
           />
         </li>
+        <li>
+          <LinkElement
+            selected={false}
+            text="Book by version"
+            link="/book-by-version"
+          />
+        </li>
+        <li>
+          <LinkElement
+            selected={false}
+            text="Author by version"
+            link="/author-by-version"
+          />
+        </li>
       </ul>
     </div>
   );

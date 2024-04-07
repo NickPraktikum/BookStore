@@ -13,6 +13,7 @@
     "@tanstack/react-query-devtools": "^5.18.1",
     "easy-peasy": "^6.0.4",
     "next": "14.1.0",
+    "postcss-nesting": "^12.1.1",
     "react": "^18",
     "react-dom": "^18"
   },

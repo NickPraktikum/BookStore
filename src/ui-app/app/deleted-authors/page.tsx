@@ -7,11 +7,6 @@ export default async function Deleted() {
     <main className="w-[410px]">
       <div className="px-[30px] flex justify-between items-center pb-[50px] pt-[30px]">
         <h3 className="font-bold text-[20px]">Available Books</h3>
-        <input
-          type="text"
-          placeholder="Find book"
-          className="w-[186px] h-[39px] bg-[#ECECEC] placeholder:text-black placeholder:font-medium rounded-lg drop-shadow-md shadow-md"
-        />
       </div>
       <Authors authors={data} />
     </main>

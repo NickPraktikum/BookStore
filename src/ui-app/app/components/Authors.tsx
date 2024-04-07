@@ -5,7 +5,7 @@ import Author from "./Author";
 const Authors: FunctionComponent<IAuthorsElement> = ({ authors }) => {
   return (
     <div className="flex gap-3 whitespace-nowrap overflow-x-auto overflow-y-hidden flex-shrink-0 flex-grow-0 flex-basis-auto scrolling-wrapper mx-[20px] pb-5">
-      {authors.map((v: IAuthorModel, index: number) => (
+      {authors?.map((v: IAuthorModel, index: number) => (
         <Author
           id={v.id}
           name={v.name}

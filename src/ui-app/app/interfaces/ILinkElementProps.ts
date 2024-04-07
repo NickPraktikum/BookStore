@@ -10,4 +10,6 @@ type Link =
   | "/available-authors"
   | "/deleted-authors"
   | "/author-by-id"
-  | "/book-by-id";
+  | "/book-by-id"
+  | "/book-by-version"
+  | "/author-by-version";

@@ -19,6 +19,16 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
+"@csstools/selector-resolve-nested@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@csstools/selector-resolve-nested/-/selector-resolve-nested-1.1.0.tgz#d872f2da402d3ce8bd0cf16ea5f9fba76b18e430"
+  integrity sha512-uWvSaeRcHyeNenKg8tp17EVDRkpflmdyvbE0DHo6D/GdBb6PDnCYYU6gRpXhtICMGMcahQmj2zGxwFM/WC8hCg==
+
+"@csstools/selector-specificity@^3.0.3":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@csstools/selector-specificity/-/selector-specificity-3.0.3.tgz#208a3929ee614967a1fc8cd6cb758d9fcbf0caae"
+  integrity sha512-KEPNw4+WW5AVEIyzC80rTbWEUatTW2lXpN8+8ILC8PiPeWPjwUzrPZDIOZ2wwqDmeqOYTdSGyL3+vE5GC3FB3Q==
+
 "@eslint-community/eslint-utils@^4.2.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@eslint-community/eslint-utils/-/eslint-utils-4.4.0.tgz#a23514e8fb9af1269d5f7788aa556798d61c6b59"
@@ -2027,10 +2037,27 @@ postcss-nested@^6.0.1:
   dependencies:
     postcss-selector-parser "^6.0.11"
 
+postcss-nesting@^12.1.1:
+  version "12.1.1"
+  resolved "https://registry.yarnpkg.com/postcss-nesting/-/postcss-nesting-12.1.1.tgz#6662d9c70e6356686dc24132f2a7520ec90d39ef"
+  integrity sha512-qc74KvIAQNa5ujZKG1UV286dhaDW6basbUy2i9AzNU/T8C9hpvGu9NZzm1SfePe2yP7sPYgpA8d4sPVopn2Hhw==
+  dependencies:
+    "@csstools/selector-resolve-nested" "^1.1.0"
+    "@csstools/selector-specificity" "^3.0.3"
+    postcss-selector-parser "^6.0.13"
+
 postcss-selector-parser@^6.0.11:
   version "6.0.15"
   resolved "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-6.0.15.tgz#11cc2b21eebc0b99ea374ffb9887174855a01535"
   integrity sha512-rEYkQOMUCEMhsKbK66tbEU9QVIxbhN18YiniAwA7XQYTVBqrBy+P2p5JcdqsHgKM2zWylp8d7J6eszocfds5Sw==
+  dependencies:
+    cssesc "^3.0.0"
+    util-deprecate "^1.0.2"
+
+postcss-selector-parser@^6.0.13:
+  version "6.0.16"
+  resolved "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-6.0.16.tgz#3b88b9f5c5abd989ef4e2fc9ec8eedd34b20fb04"
+  integrity sha512-A0RVJrX+IUkVZbW3ClroRWurercFhieevHB38sr2+l9eUClMqome3LmEmnhlNy+5Mr2EYN6B2Kaw9wYdd+VHiw==
   dependencies:
     cssesc "^3.0.0"
     util-deprecate "^1.0.2"
