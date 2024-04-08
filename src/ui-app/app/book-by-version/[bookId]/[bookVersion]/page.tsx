@@ -1,4 +1,5 @@
 import Book from "@/app/components/Book";
+import SearchFormVersionBlocks from "@/app/components/SearchFormVersionBlocks";
 
 export default async function Page({
   params: { bookId, bookVersion },
@@ -8,15 +9,8 @@ export default async function Page({
   var book: IBookModel = await FetchBookByVersion(bookId, bookVersion);
   return (
     <main className="w-[410px]">
-      <div className="px-[30px] flex justify-between items-center pb-[50px] pt-[30px]">
-        <h3 className="font-bold text-[20px]">Book by version</h3>
-        <input
-          type="text"
-          placeholder="Find a book"
-          className="w-[186px] h-[39px] bg-[#ECECEC] placeholder:text-black placeholder:font-medium rounded-lg drop-shadow-md shadow-md"
-        />
-      </div>
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center flex-col">
+        <SearchFormVersionBlocks mode="book" />
         <Book
           id={book.id}
           ISBN={book.isbn}

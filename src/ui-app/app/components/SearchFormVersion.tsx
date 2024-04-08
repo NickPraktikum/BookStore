@@ -3,14 +3,15 @@ import Link from "next/link";
 import { FunctionComponent, useState } from "react";
 import { ISearchFormMode } from "../interfaces/ISearchFormMode";
 
-const SearchForm: FunctionComponent<ISearchFormMode> = ({ mode }) => {
+const SearchFormVersion: FunctionComponent<ISearchFormMode> = ({ mode }) => {
   const [entity, changeEntity] = useState<string>("");
+  const [version, changeVersion] = useState<string>("");
   return (
-    <main className="w-[410px]">
-      <div className="px-[30px] flex justify-center items-center flex-col pt-[30px] gap-5">
-        <h3 className="font-bold text-[20px]">
-          {mode == "author" ? "Author" : "Book"} by id
-        </h3>
+    <div className="px-[15px] flex-col pb-[50px] pt-[30px]">
+      <h3 className="font-bold text-[20px] pb-[15px] text-center">
+        {mode == "author" ? "Author" : "Book"} by version
+      </h3>
+      <div className="flex justify-between items-center flex-col gap-[20px]">
         <div className="flex justify-between items-center gap-[8px] bg-[#ECECEC] rounded-lg drop-shadow-md shadow-md">
           <svg
             className="h-[39px] ml-[13px]"
@@ -37,16 +38,22 @@ const SearchForm: FunctionComponent<ISearchFormMode> = ({ mode }) => {
           </svg>
           <input
             type="text"
-            placeholder={`Find ${mode == "author" ? "an author" : "a book"}`}
-            className="w-[186px] h-[39px] bg-[#ECECEC] placeholder:text-black placeholder:font-medium placeholder:text-sm pr-2 focus:outline-none rounded-lg border-none"
+            placeholder="Find a book"
+            className="w-[157px] h-[39px] bg-[#ECECEC] placeholder:text-black placeholder:font-medium placeholder:text-sm focus:outline-none rounded-lg border-none pr-2"
             onChange={(e) => changeEntity(e.target.value)}
           />
         </div>
+        <input
+          type="text"
+          placeholder="Enter the version"
+          className="w-[157px] h-[39px] bg-[#ECECEC] placeholder:text-black placeholder:font-medium placeholder:text-sm focus:outline-none rounded-lg border-none drop-shadow-md shadow-md px-2 pl-3"
+          onChange={(e) => changeVersion(e.target.value)}
+        />
         <Link
           href={
             mode == "author"
-              ? `/author-by-id/${entity}`
-              : `/book-by-id/${entity}`
+              ? `/author-by-version/${entity}/${version}`
+              : `/book-by-version/${entity}/${version}`
           }
         >
           <div className="bg-[#ECECEC] w-[93px] h-[39px] rounded-[12px] drop flex items-center flex-row drop-shadow-md shadow-md px-[15px] gap-[7.5px] hover:gap-[10px]">
@@ -68,7 +75,7 @@ const SearchForm: FunctionComponent<ISearchFormMode> = ({ mode }) => {
           </div>
         </Link>
       </div>
-    </main>
+    </div>
   );
 };
-export default SearchForm;
+export default SearchFormVersion;

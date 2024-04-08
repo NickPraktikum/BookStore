@@ -1,4 +1,5 @@
 import Author from "@/app/components/Author";
+import SearchFormVersionBlocks from "@/app/components/SearchFormVersionBlocks";
 
 export default async function Page({
   params: { authorId },
@@ -8,15 +9,8 @@ export default async function Page({
   var author: IAuthorModel = await FetchAuthorByVersion(authorId, "1");
   return (
     <main className="w-[410px]">
-      <div className="px-[30px] flex justify-between items-center pb-[50px] pt-[30px]">
-        <h3 className="font-bold text-[20px]">Author by version</h3>
-        <input
-          type="text"
-          placeholder="Find an author"
-          className="w-[186px] h-[39px] bg-[#ECECEC] placeholder:text-black placeholder:font-medium rounded-lg drop-shadow-md shadow-md"
-        />
-      </div>
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center flex-col">
+        <SearchFormVersionBlocks mode="author" />
         <Author
           id={author.id}
           name={author.name}
