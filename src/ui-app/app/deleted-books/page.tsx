@@ -6,9 +6,9 @@ export default async function Deleted() {
   return (
     <main className="w-[410px]">
       <div className="px-[30px] flex justify-between items-center pb-[50px] pt-[30px]">
-        <h3 className="font-bold text-[20px]">Deleted Books</h3>
+        <h3 className="font-bold text-[20px]">Books</h3>
       </div>
-      <Books books={data} />
+      <Books books={data} text="Deleted books" />
     </main>
   );
 }

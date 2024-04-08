@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import Authors from "../components/Authors";
 import Books from "../components/Books";
 
@@ -6,9 +7,9 @@ export default async function Deleted() {
   return (
     <main className="w-[410px]">
       <div className="px-[30px] flex justify-between items-center pb-[50px] pt-[30px]">
-        <h3 className="font-bold text-[20px]">Available Books</h3>
+        <h3 className="font-bold text-[20px]">Books</h3>
       </div>
-      <Authors authors={data} />
+      <Authors authors={data} text="Deleted authors" />
     </main>
   );
 }
@@ -20,11 +21,12 @@ async function FetchDeletedAuthors() {
       {
         method: "GET",
         headers: { "Content-Type": "application/json" },
-        next: { revalidate: 5000 },
+        next: { revalidate: 10 },
       }
     );
     if (res.status == 404) {
     }
+
     return await res.json();
   } catch (e) {
     return String(e);

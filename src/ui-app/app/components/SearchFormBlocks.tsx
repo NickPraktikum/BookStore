@@ -3,14 +3,14 @@ import Link from "next/link";
 import { FunctionComponent, useState } from "react";
 import { ISearchFormMode } from "../interfaces/ISearchFormMode";
 
-const SearchForm: FunctionComponent<ISearchFormMode> = ({ mode }) => {
+const SearchFormBlocks: FunctionComponent<ISearchFormMode> = ({ mode }) => {
   const [entity, changeEntity] = useState<string>("");
   return (
-    <main className="w-[410px]">
-      <div className="px-[30px] flex justify-center items-center flex-col pt-[30px] gap-5">
-        <h3 className="font-bold text-[20px]">
-          {mode == "author" ? "Author" : "Book"} by id
-        </h3>
+    <div className="px-[15px]  flex-col pb-[50px] pt-[30px]">
+      <h3 className="font-bold text-[20px] pb-[15px]">
+        {mode == "author" ? "Author" : "Book"} by id
+      </h3>
+      <div className="flex justify-between items-center flex-row gap-[11px]">
         <div className="flex justify-between items-center gap-[8px] bg-[#ECECEC] rounded-lg drop-shadow-md shadow-md">
           <svg
             className="h-[39px] ml-[13px]"
@@ -37,8 +37,8 @@ const SearchForm: FunctionComponent<ISearchFormMode> = ({ mode }) => {
           </svg>
           <input
             type="text"
-            placeholder={`Find ${mode == "author" ? "an author" : "a book"}`}
-            className="w-[186px] h-[39px] bg-[#ECECEC] placeholder:text-black placeholder:font-medium placeholder:text-sm pr-2 focus:outline-none rounded-lg border-none"
+            placeholder="Find a book"
+            className="w-[160px] h-[39px] bg-[#ECECEC] placeholder:text-black placeholder:font-medium placeholder:text-sm focus:outline-none rounded-lg border-none pr-2"
             onChange={(e) => changeEntity(e.target.value)}
           />
         </div>
@@ -68,7 +68,7 @@ const SearchForm: FunctionComponent<ISearchFormMode> = ({ mode }) => {
           </div>
         </Link>
       </div>
-    </main>
+    </div>
   );
 };
-export default SearchForm;
+export default SearchFormBlocks;
