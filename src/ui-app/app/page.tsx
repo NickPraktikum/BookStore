@@ -3,7 +3,7 @@ import Book from "./components/Book";
 import Books from "./components/Books";
 
 export default async function Home() {
-  const data: Array<IBookModel> = await FetchAvailableBooks();
+  const data: IBookModel[] = await FetchAvailableBooks();
   return (
     <main className="w-[410px]">
       <div className="px-[30px] flex justify-between items-center pb-[50px] pt-[30px]">

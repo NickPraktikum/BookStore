@@ -1,54 +1,65 @@
+"use client";
 import { FunctionComponent } from "react";
 import LinkElement from "./LinkElement";
+import { usePathname } from "next/navigation";
 
 const Navigation: FunctionComponent = () => {
+  const pathname = usePathname();
   return (
     <div className="w-[220px] bg-[#EBF1E6] flex justify-center items-center">
       <ul className="flex flex-col gap-5 w-[184px] font-semibold text-sm">
         <li>
-          <LinkElement selected={false} text="Available books" link={"/"} />
+          <LinkElement
+            selected={pathname === "/"}
+            text="Available books"
+            link="/"
+          />
         </li>
         <li>
           <LinkElement
-            selected={true}
+            selected={pathname === "/deleted-books"}
             text="Deleted books"
             link="/deleted-books"
           />
         </li>
         <li>
           <LinkElement
-            selected={false}
+            selected={pathname === "/available-authors"}
             text="Available authors"
             link="/available-authors"
           />
         </li>
         <li>
           <LinkElement
-            selected={false}
+            selected={pathname === "/deleted-authors"}
             text="Deleted authors"
             link="/deleted-authors"
           />
         </li>
         <li>
-          <LinkElement selected={false} text="Book by id" link="/book-by-id" />
+          <LinkElement
+            selected={pathname === "/book-by-id"}
+            text="Book by id"
+            link="/book-by-id"
+          />
         </li>
         <li>
           <LinkElement
-            selected={false}
+            selected={pathname === "/author-by-id"}
             text="Author by id"
             link="/author-by-id"
           />
         </li>
         <li>
           <LinkElement
-            selected={false}
+            selected={pathname === "/book-by-version"}
             text="Book by version"
             link="/book-by-version"
           />
         </li>
         <li>
           <LinkElement
-            selected={false}
+            selected={pathname === "/author-by-version"}
             text="Author by version"
             link="/author-by-version"
           />

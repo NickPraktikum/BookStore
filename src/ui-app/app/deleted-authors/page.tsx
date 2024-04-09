@@ -3,7 +3,7 @@ import Authors from "../components/Authors";
 import Books from "../components/Books";
 
 export default async function Deleted() {
-  const data: Array<IAuthorModel> = await FetchDeletedAuthors();
+  const data: IAuthorModel[] = await FetchDeletedAuthors();
   return (
     <main className="w-[410px]">
       <div className="px-[30px] flex justify-between items-center pb-[50px] pt-[30px]">
@@ -15,6 +15,7 @@ export default async function Deleted() {
 }
 
 async function FetchDeletedAuthors() {
+  console.log("Revalidation");
   try {
     const res = await fetch(
       "http://localhost:5000/api/v1/BookStore/Author/Deleted",
@@ -25,8 +26,9 @@ async function FetchDeletedAuthors() {
       }
     );
     if (res.status == 404) {
+      throw Error("Not Found");
     }
-
+    revalidatePath("/deleted-authors", "page");
     return await res.json();
   } catch (e) {
     return String(e);

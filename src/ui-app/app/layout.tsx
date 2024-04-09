@@ -6,6 +6,7 @@ import Link from "next/link";
 import LinkElement from "./components/LinkElement";
 import Navigation from "./components/Navigation";
 import { QueryProvider } from "./providers/QueryProvider";
+import EntityNavigationLayout from "./providers/EntityNavigation";
 
 export const metadata = {
   title: "Next.js",
