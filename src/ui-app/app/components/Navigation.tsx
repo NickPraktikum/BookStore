@@ -52,14 +52,20 @@ const Navigation: FunctionComponent = () => {
         </li>
         <li>
           <LinkElement
-            selected={pathname === "/book-by-version"}
+            selected={
+              pathname === "/book-by-version" ||
+              pathname.includes("/book-by-version")
+            }
             text="Book by version"
             link="/book-by-version"
           />
         </li>
         <li>
           <LinkElement
-            selected={pathname === "/author-by-version"}
+            selected={
+              pathname === "/author-by-version" ||
+              pathname.includes("/author-by-version")
+            }
             text="Author by version"
             link="/author-by-version"
           />
