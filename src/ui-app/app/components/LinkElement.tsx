@@ -13,7 +13,7 @@ const LinkElement: FunctionComponent<LinkElement> = ({
       href={link}
       className={`border-b flex flex-row items-center justify-between pb-[10px] px-[6px] ${
         selected ? "border-black" : "border-[#00000080]"
-      }`}
+      } hover:w-[99%]`}
     >
       <p className={selected ? "text-black" : "text-[#00000080]"}>{text}</p>
       <div>
