@@ -1,9 +1,10 @@
 import React from "react";
 import Book from "./components/Book";
 import Books from "./components/Books";
+import { IBookModel } from "./interfaces/IBookModel";
 
 export default async function Home() {
-  const data: IBookModel[] = await FetchAvailableBooks();
+  const data: Array<IBookModel> = await FetchAvailableBooks();
   return (
     <main className="w-[410px]">
       <div className="px-[30px] flex justify-between items-center pb-[50px] pt-[30px]">

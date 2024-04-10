@@ -1,6 +1,6 @@
 export interface IBookModel {
   id: number;
-  ISBN: string;
+  isbn: string;
   title: string;
   version: number;
 }

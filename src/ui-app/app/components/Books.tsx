@@ -3,6 +3,7 @@ import { FetchAvailableBooks } from "../functions/FetchAvailableBooks";
 import Book from "./Book";
 import { IBooksElement } from "../interfaces/IBooksElement";
 import ScrollBar from "./ScrollBar";
+import { IBookModel } from "../interfaces/IBookModel";
 
 const Books: FunctionComponent<IBooksElement> = ({ books, text }) => {
   return (
@@ -17,7 +18,7 @@ const Books: FunctionComponent<IBooksElement> = ({ books, text }) => {
             <Book
               key={index}
               id={v.id}
-              ISBN={v.isbn}
+              isbn={v.isbn}
               title={v.title}
               version={v.version}
             />

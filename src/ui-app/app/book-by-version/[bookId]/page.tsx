@@ -1,5 +1,6 @@
 import Book from "@/app/components/Book";
 import SearchFormVersionBlocks from "@/app/components/SearchFormVersionBlocks";
+import { IBookModel } from "@/app/interfaces/IBookModel";
 
 export default async function Page({
   params: { bookId },
@@ -13,7 +14,7 @@ export default async function Page({
         <SearchFormVersionBlocks mode="book" />
         <Book
           id={book.id}
-          ISBN={book.isbn}
+          isbn={book.isbn}
           title={book.title}
           version={book.version}
         />

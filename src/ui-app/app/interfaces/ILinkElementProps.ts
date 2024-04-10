@@ -1,4 +1,4 @@
-export interface LinkElement {
+export interface ILinkElement {
   selected: boolean;
   text: string;
   link: Link;

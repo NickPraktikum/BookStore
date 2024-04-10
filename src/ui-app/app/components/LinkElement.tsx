@@ -1,9 +1,9 @@
 "use client";
 import Link from "next/link";
 import { FunctionComponent } from "react";
-import { LinkElement } from "../interfaces/ILinkElementProps";
+import { ILinkElement } from "../interfaces/ILinkElementProps";
 
-const LinkElement: FunctionComponent<LinkElement> = ({
+const LinkElement: FunctionComponent<ILinkElement> = ({
   selected,
   text,
   link,

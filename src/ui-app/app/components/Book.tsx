@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
-import { IBookProps } from "../interfaces/IBookProps";
+import { IBookModel } from "../interfaces/IBookModel";
 
-const Book: FunctionComponent<IBookProps> = ({ id, ISBN, title, version }) => {
+const Book: FunctionComponent<IBookModel> = ({ id, isbn, title, version }) => {
   return (
     <div
       className="flex justify-center items-center flex-col w-[81px] h-[104px] bg-[#FDF397] border border-black rounded-lg drop-shadow-md 
@@ -12,7 +12,7 @@ const Book: FunctionComponent<IBookProps> = ({ id, ISBN, title, version }) => {
       </h6>
       <div className="font-normal text-[9px] flex items-center flex-col gap-[2px] text-[#666666] p-[0.5px]">
         <p>Id: {id}</p>
-        <p className="text-wrap text-center">ISBN: {ISBN}</p>
+        <p className="text-wrap text-center">ISBN: {isbn}</p>
         <p>Version: {version}</p>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import Books from "../components/Books";
+import { IBookModel } from "../interfaces/IBookModel";
 
 export default async function Deleted() {
   const data: Array<IBookModel> = await FetchDeletedBooks();

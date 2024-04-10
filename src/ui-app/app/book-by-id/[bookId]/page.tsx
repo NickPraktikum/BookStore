@@ -1,5 +1,6 @@
 import Book from "@/app/components/Book";
 import SearchFormBlocks from "@/app/components/SearchFormBlocks";
+import { IBookModel } from "@/app/interfaces/IBookModel";
 import Link from "next/link";
 
 export default async function Deleted({
@@ -14,7 +15,7 @@ export default async function Deleted({
         <SearchFormBlocks mode={"book"} />
         <Book
           id={book.id}
-          ISBN={book.isbn}
+          isbn={book.isbn}
           title={book.title}
           version={book.version}
         />
