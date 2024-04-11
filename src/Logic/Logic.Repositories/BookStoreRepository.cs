@@ -70,7 +70,7 @@
         {
             var authorEntities = await _context.Authors.ToArrayAsync();
             var authorModels = _mapper.Map<AuthorModel[]>(authorEntities);
-            foreach(var author in authorModels)
+            foreach (var author in authorModels)
             {
                 author.Books = null!;
             }
@@ -82,10 +82,6 @@
         {
             var bookEntities = await _context.Books.ToArrayAsync();
             var bookModels = _mapper.Map<BookModel[]>(bookEntities);
-            foreach(var book in bookModels)
-            {
-                book!.Author!.Books = null!;
-            }
             return bookModels;
         }
 
@@ -102,9 +98,9 @@
         {
             var booksEntities = await _context.Books.IgnoreQueryFilters().Where((book) => book.IsDeleted == true).ToArrayAsync();
             var bookModels = _mapper.Map<BookModel[]>(booksEntities);
-            foreach(var book in bookModels )
+            foreach (var book in bookModels)
             {
-                if(book.Author != null)
+                if (book.Author != null)
                 {
                     book.Author.Books = null!;
                 }
@@ -156,7 +152,7 @@
         public async Task<AuthorEntity> GetAuthorByIdAsync(long id)
         {
 
-            var author = await _context.Authors.FirstOrDefaultAsync(author => author.Id == id);
+            var author = await _context.Authors.Include(a => a.Books).FirstOrDefaultAsync(author => author.Id == id);
             if (author == null)
             {
                 throw new EntityNotFoundException("Such author doesn't exist");

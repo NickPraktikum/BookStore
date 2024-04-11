@@ -57,8 +57,6 @@
         /// <remarks>
         /// Establishes an n to m relationship.
         /// </remarks>
-       
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public virtual ICollection<BookEntity>? Books { get; set; }
 
         /// <inheritdoc/>

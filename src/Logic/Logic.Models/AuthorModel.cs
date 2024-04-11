@@ -43,8 +43,7 @@
         /// <remarks>
         /// Establishes an n to m relationship.
         /// </remarks>
-        
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+
         public ICollection<BookModel>? Books { get; set; }
 
         /// <inheritdoc/>

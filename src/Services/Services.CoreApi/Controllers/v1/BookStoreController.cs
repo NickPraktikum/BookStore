@@ -7,7 +7,6 @@
     using devdeer.BookStore.Logic.Models.UpdateModels;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.IdentityModel.Tokens;
-    using Newtonsoft.Json;
 
     /// <summary>
     /// Provides endpoints to handle book store data.
