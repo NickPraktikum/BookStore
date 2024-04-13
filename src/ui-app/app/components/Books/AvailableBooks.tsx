@@ -40,5 +40,4 @@ const AvailableBooks: FunctionComponent<IBooksElement> = ({ text }) => {
     </>
   );
 };
-
 export default AvailableBooks;

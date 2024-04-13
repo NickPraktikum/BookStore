@@ -1,43 +1,44 @@
 "use client";
 import { FunctionComponent } from "react";
+import { FetchAvailableBooks } from "../../functions/FetchAvailableBooks";
+import { IBooksElement } from "../../interfaces/IBooksElement";
+import ScrollBar from "../ScrollBar";
 import { IBookModel } from "../../interfaces/IBookModel";
 import { useQuery } from "@tanstack/react-query";
-import { IFetchBook } from "../../interfaces/IFetchBook";
 import ErrorBlock from "../ErrorBlock";
 import Book from "../Books/Book";
-import { FetchBookVersion } from "../../functions/FetchBookVersion";
-import { IFetchBookVersion } from "../../interfaces/IFetchBookVersion";
-import Author from "./Author";
-import { FetchAuthorVersion } from "../../functions/FetchAuthorVersion";
-import { IFetchAuthorVersion } from "../../interfaces/IFetchAuthorVersion";
-import ErrorBlockSingle from "../ErrorBlockSingle";
 
-const FetchAuthorVersionBlock: FunctionComponent<IFetchAuthorVersion> = ({
-  authorId,
-  version,
-}) => {
-  const { data, error, isError } = useQuery<IAuthorModel, Error>({
-    queryKey: ["author-version", authorId],
-    queryFn: () => FetchAuthorVersion(authorId, version),
+const AvailableBooks: FunctionComponent<IBooksElement> = ({ text }) => {
+  const { data, error, isError } = useQuery<IBookModel[], Error>({
+    queryKey: ["available-books"],
+    queryFn: FetchAvailableBooks,
     refetchInterval: 180000,
   });
   return (
     <>
       {isError ? (
-        <ErrorBlockSingle
-          errorMessage={error.message}
-          isBook={false}
-          isVersion={true}
-        />
+        <ErrorBlock errorMessage={error.message} />
       ) : (
-        <Author
-          id={data?.id as number}
-          name={data?.name as string}
-          surname={data?.surname as string}
-          version={data?.version as number}
-        />
+        <div>
+          <ScrollBar text={text} />
+          <div
+            id="slider"
+            className="flex gap-3 whitespace-nowrap overflow-x-auto overflow-y-hidden flex-shrink-0 flex-grow-0 flex-basis-auto scrolling-wrapper mx-[25px] pb-5"
+          >
+            {data?.map((v: IBookModel, index: number) => (
+              <Book
+                key={index}
+                id={v.id}
+                isbn={v.isbn}
+                title={v.title}
+                version={v.version}
+              />
+            ))}
+          </div>
+        </div>
       )}
     </>
   );
 };
-export default FetchAuthorVersionBlock;
+
+export default AvailableBooks;
