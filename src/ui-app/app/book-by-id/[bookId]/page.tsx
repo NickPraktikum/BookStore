@@ -1,6 +1,13 @@
-import Book from "@/app/components/Book";
+import Book from "@/app/components/Books/Book";
+import FetchBook from "@/app/components/Books/FetchBook";
 import SearchFormBlocks from "@/app/components/SearchFormBlocks";
+import { FetchBookById } from "@/app/functions/FetchBookById";
 import { IBookModel } from "@/app/interfaces/IBookModel";
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from "@tanstack/react-query";
 import Link from "next/link";
 
 export default async function Deleted({
@@ -8,36 +15,19 @@ export default async function Deleted({
 }: {
   params: { bookId: string };
 }) {
-  var book: IBookModel = await FetchBookById(bookId);
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ["books", bookId],
+    queryFn: () => FetchBookById(bookId),
+  });
   return (
     <main className="w-[410px]">
       <div className="flex items-center flex-col">
         <SearchFormBlocks mode={"book"} />
-        <Book
-          id={book.id}
-          isbn={book.isbn}
-          title={book.title}
-          version={book.version}
-        />
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <FetchBook bookId={bookId} />
+        </HydrationBoundary>
       </div>
     </main>
   );
-}
-
-async function FetchBookById(id: string) {
-  try {
-    const res = await fetch(
-      `http://localhost:5000/api/v1/BookStore/Book/${id}`,
-      {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-        next: { revalidate: 5000 },
-      }
-    );
-    if (res.status == 404) {
-    }
-    return await res.json();
-  } catch (e) {
-    return String(e);
-  }
 }

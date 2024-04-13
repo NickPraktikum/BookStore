@@ -1,6 +1,5 @@
 ﻿namespace devdeer.BookStore.Services.CoreApi.Controllers.v1
 {
-    using devdeer.BookStore.Data.Contexts.v1;
     using devdeer.BookStore.Data.Entities;
     using devdeer.BookStore.Logic.Interfaces;
     using devdeer.BookStore.Logic.Models;
@@ -39,7 +38,7 @@
         /// <returns>The data of the created book.</returns>
         /// <response code="200">The book was created successfully.</response>
         /// <response code="400">The book could not be created.</response>
-        [HttpPost("Book")]
+        [HttpPost()]
         public async Task<ActionResult<BookModel>> CreateBook(CreateBookModel model)
         {
             var result = await Logic.CreateBookAsync(model);
@@ -55,7 +54,7 @@
         /// </returns>
         /// <response code="200">All book was deleted successfully.</response>
         /// <response code="400">The book could not be deleted.</response>
-        [HttpDelete("Book/{id}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> DeleteBook(long id)
         {
             var result = await Logic.DeleteBookAsync(id);
@@ -68,7 +67,7 @@
         /// <returns>The list of all the available books in the backend.</returns>
         /// <response code="200">At least 1 available book was retrieved successfully.</response>
         /// <response code="404">No available books were found.</response>
-        [HttpGet("Book/Available")]
+        [HttpGet("Available")]
         public async Task<ActionResult<IEnumerable<BookModel>?>> GetAllAvailableBooks()
         {
             var result = await Logic.GetAllAvailableBooksAsync();
@@ -81,7 +80,7 @@
         /// <returns>The list of all the deleted books in the backend.</returns>
         /// <response code="200">At least 1 deleted book was retrieved successfully.</response>
         /// <response code="404">No deleted books were found.</response>
-        [HttpGet("Book/Deleted")]
+        [HttpGet("Deleted")]
         public async Task<ActionResult<IEnumerable<BookModel>?>> GetAllDeletedBooks()
         {
             var result = await Logic.GetAllDeletedBooksAsync();
@@ -96,7 +95,7 @@
         /// <returns>The updated author.</returns>
         /// <response code="200">The book was updated successfully.</response>
         /// <response code="400">The book could not be updated.</response>
-        [HttpPatch("Book/{id}")]
+        [HttpPatch("{id}")]
         public async Task<ActionResult<BookModel>> UpdateBook(long id, UpdateBookModel model)
         {
             var result = await Logic.UpdateBookAsync(id, model);
@@ -109,7 +108,7 @@
         /// <returns>The data of the retrieved book.</returns>
         /// <response code="200">The book was found successfully.</response>
         /// <response code="400">The book couldn't be retrieved.</response>
-        [HttpGet("Book/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<BookEntity?>> GetBookById(long id)
         {
             var result = await Logic.GetBookByIdAsync(id);
@@ -124,7 +123,7 @@
         /// <returns>The data of the retrieved book.</returns>
         /// <response code="200">The book was found successfully.</response>
         /// <response code="400">The book couldn't be retrieved.</response>
-        [HttpGet("Book/{id}/{version}")]
+        [HttpGet("{id}/{version}")]
         public async Task<ActionResult<BookModel?>> GetBookByVersion(long id, int version)
         {
             var result = await Logic.GetBookByVersionAsync(id, version);

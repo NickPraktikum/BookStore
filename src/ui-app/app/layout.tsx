@@ -6,7 +6,6 @@ import Link from "next/link";
 import LinkElement from "./components/LinkElement";
 import Navigation from "./components/Navigation";
 import { QueryProvider } from "./providers/QueryProvider";
-import EntityNavigationLayout from "./providers/EntityNavigation";
 
 export const metadata = {
   title: "Next.js",
@@ -21,10 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex justify-center" suppressHydrationWarning={true}>
-        <div className="w-[630px] h-[453px] drop-shadow-md mt-2 flex flex-row border rounded-3xl overflow-hidden">
-          <Navigation />
-          <div className="bg-white">{children}</div>
-        </div>
+        <QueryProvider>
+          <div className="w-[630px] h-[453px] drop-shadow-md mt-2 flex flex-row border rounded-3xl overflow-hidden">
+            <Navigation />
+            <div className="bg-white">{children}</div>
+          </div>
+        </QueryProvider>
       </body>
     </html>
   );

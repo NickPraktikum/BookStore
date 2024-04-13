@@ -1,5 +1,5 @@
-export async function FetchAvailableBooks() {
-  return await fetch("https://localhost:5001/api/v1/Book/Available")
+export async function FetchAuthorById(id: string) {
+  return await fetch(`https://localhost:5001/api/v1/Author/${id}`)
     .then(async (res) => {
       if (res.ok) {
         return await res.json();

@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { IBookModel } from "../interfaces/IBookModel";
+import { IBookModel } from "../../interfaces/IBookModel";
 
 const Book: FunctionComponent<IBookModel> = ({ id, isbn, title, version }) => {
   return (

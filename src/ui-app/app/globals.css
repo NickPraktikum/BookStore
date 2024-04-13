@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oxygen+Mono&display=swap");
 
 @layer utilities {
   html {
@@ -13,6 +14,11 @@
   .source-code-pro {
     font-family: "Source Code Pro", monospace;
     font-optical-sizing: auto;
+    font-style: normal;
+  }
+  .oxygen-mono-regular {
+    font-family: "Oxygen Mono", monospace;
+    font-weight: 400;
     font-style: normal;
   }
   .scrolling-wrapper {
