@@ -17,6 +17,7 @@
         public void Configure(EntityTypeBuilder<AuthorEntity> builder)
         {
             builder.HasQueryFilter(q => q.IsDeleted == false);
+
         }
 
         #endregion

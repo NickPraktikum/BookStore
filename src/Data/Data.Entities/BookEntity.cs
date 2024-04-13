@@ -82,6 +82,6 @@
         /// <remarks>
         /// The relation between the <see cref="BookEntity"/> and <see cref="AuthorEntity"/> entities is established via the AuthorId property (<see cref="AuthorId"/>)
         /// </remarks>
-        public virtual AuthorEntity? Author { get; set; }
+        public AuthorEntity? Author { get; set; }
     }
 }

@@ -57,7 +57,7 @@
         /// <remarks>
         /// Establishes an n to m relationship.
         /// </remarks>
-        public virtual ICollection<BookEntity>? Books { get; set; }
+        public ICollection<BookEntity>? Books { get; set; }
 
         /// <inheritdoc/>
         [Column(nameof(Version), Order = 15)]
@@ -65,3 +65,4 @@
         public int Version { get; set; } = 1;
     }
 }
+

@@ -7,6 +7,7 @@
     using Interceptors;
 
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
 
     /// <summary>
     /// The central context of the app.

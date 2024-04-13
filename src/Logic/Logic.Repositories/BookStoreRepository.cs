@@ -80,7 +80,7 @@
         /// <inheritdoc/>
         public async Task<BookModel[]?> GetAllAvailableBooksAsync()
         {
-            var bookEntities = await _context.Books.ToArrayAsync();
+            var bookEntities = await _context.Set<BookEntity>().Include(a => a.Author!.Books).ToArrayAsync();
             var bookModels = _mapper.Map<BookModel[]>(bookEntities);
             return bookModels;
         }
