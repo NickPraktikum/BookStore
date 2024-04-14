@@ -6,9 +6,10 @@ import { FetchBookById } from "../../functions/FetchBookById";
 import { IFetchBook } from "../../interfaces/IFetchBook";
 import ErrorBlock from "../ErrorBlock";
 import ErrorBlockSingle from "../ErrorBlockSingle";
+import LoadingBlock from "../LoadingBlock";
 
 const FetchBook: FunctionComponent<IFetchBook> = ({ bookId }) => {
-  const { data, error, isError } = useQuery<IBookModel, Error>({
+  const { data, error, isError, isLoading } = useQuery<IBookModel, Error>({
     queryKey: ["books", bookId],
     queryFn: () => FetchBookById(bookId),
     refetchInterval: 180000,
@@ -22,6 +23,8 @@ const FetchBook: FunctionComponent<IFetchBook> = ({ bookId }) => {
           isBook={true}
           isVersion={false}
         />
+      ) : isLoading ? (
+        <LoadingBlock />
       ) : (
         <div
           className="flex justify-center items-center flex-col w-[81px] h-[104px] bg-[#FDF397] border border-black rounded-lg drop-shadow-md 

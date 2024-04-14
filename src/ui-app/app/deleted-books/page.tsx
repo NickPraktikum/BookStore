@@ -5,6 +5,7 @@ import {
 } from "@tanstack/react-query";
 import { IBookModel } from "../interfaces/IBookModel";
 import DeletedBooks from "../components/Books/DeletedBooks";
+import { FetchDeletedBooks } from "../functions/FetchDeletedBooks";
 
 export default async function Deleted() {
   const queryClient = new QueryClient();
@@ -22,22 +23,4 @@ export default async function Deleted() {
       </HydrationBoundary>
     </main>
   );
-}
-
-async function FetchDeletedBooks() {
-  try {
-    const res = await fetch(
-      "http://localhost:5000/api/v1/BookStore/Book/Deleted",
-      {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-        next: { revalidate: 5000 },
-      }
-    );
-    if (res.status == 404) {
-    }
-    return await res.json();
-  } catch (e) {
-    return String(e);
-  }
 }

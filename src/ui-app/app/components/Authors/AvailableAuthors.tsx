@@ -6,9 +6,10 @@ import ScrollBar from "../ScrollBar";
 import { useQuery } from "@tanstack/react-query";
 import { FetchAvailableAuthors } from "../../functions/FetchAvailableAuthors";
 import ErrorBlock from "../ErrorBlock";
+import LoadingBlock from "../LoadingBlock";
 
 const AvailableAuthors: FunctionComponent<IAuthorsElement> = ({ text }) => {
-  const { data, error, isError } = useQuery<IAuthorModel[], Error>({
+  const { data, error, isError, isLoading } = useQuery<IAuthorModel[], Error>({
     queryKey: ["available-authors"],
     queryFn: FetchAvailableAuthors,
     refetchInterval: 180000,
@@ -17,6 +18,8 @@ const AvailableAuthors: FunctionComponent<IAuthorsElement> = ({ text }) => {
     <>
       {isError ? (
         <ErrorBlock errorMessage={error.message} />
+      ) : isLoading ? (
+        <LoadingBlock />
       ) : (
         <>
           <ScrollBar text={text} />

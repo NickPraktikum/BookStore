@@ -8,12 +8,13 @@ import Book from "./Book";
 import { FetchBookVersion } from "../../functions/FetchBookVersion";
 import { IFetchBookVersion } from "../../interfaces/IFetchBookVersion";
 import ErrorBlockSingle from "../ErrorBlockSingle";
+import LoadingBlock from "../LoadingBlock";
 
 const FetchBookVersionBlock: FunctionComponent<IFetchBookVersion> = ({
   bookId,
   version,
 }) => {
-  const { data, error, isError } = useQuery<IBookModel, Error>({
+  const { data, error, isError, isLoading } = useQuery<IBookModel, Error>({
     queryKey: ["books-version", bookId],
     queryFn: () => FetchBookVersion(bookId, version),
     refetchInterval: 180000,
@@ -26,6 +27,8 @@ const FetchBookVersionBlock: FunctionComponent<IFetchBookVersion> = ({
           isBook={true}
           isVersion={true}
         />
+      ) : isLoading ? (
+        <LoadingBlock />
       ) : (
         <Book
           id={data?.id as number}

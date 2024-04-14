@@ -7,9 +7,10 @@ import { useQuery } from "@tanstack/react-query";
 import { FetchAvailableAuthors } from "../../functions/FetchAvailableAuthors";
 import ErrorBlock from "../ErrorBlock";
 import { FetchDeletedAuthors } from "../../functions/FetchDeletedAuthors";
+import LoadingBlock from "../LoadingBlock";
 
 const DeletedAuthors: FunctionComponent<IAuthorsElement> = ({ text }) => {
-  const { data, error, isError } = useQuery<IAuthorModel[], Error>({
+  const { data, error, isError, isLoading } = useQuery<IAuthorModel[], Error>({
     queryKey: ["deleted-authors"],
     queryFn: FetchDeletedAuthors,
     refetchInterval: 180000,
@@ -18,6 +19,8 @@ const DeletedAuthors: FunctionComponent<IAuthorsElement> = ({ text }) => {
     <>
       {isError ? (
         <ErrorBlock errorMessage={error.message} />
+      ) : isLoading ? (
+        <LoadingBlock />
       ) : (
         <>
           <ScrollBar text={text} />

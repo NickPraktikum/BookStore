@@ -7,9 +7,10 @@ import ErrorBlock from "../ErrorBlock";
 import { IFetchAuthor } from "../../interfaces/IFetchAuthor";
 import { FetchAuthorById } from "../../functions/FetchAuthorById";
 import ErrorBlockSingle from "../ErrorBlockSingle";
+import LoadingBlock from "../LoadingBlock";
 
 const FetchAuthor: FunctionComponent<IFetchAuthor> = ({ authorId }) => {
-  const { data, error, isError } = useQuery<IAuthorModel, Error>({
+  const { data, error, isError, isLoading } = useQuery<IAuthorModel, Error>({
     queryKey: ["authors", authorId],
     queryFn: () => FetchAuthorById(authorId),
     refetchInterval: 180000,
@@ -23,6 +24,8 @@ const FetchAuthor: FunctionComponent<IFetchAuthor> = ({ authorId }) => {
           isBook={false}
           isVersion={false}
         />
+      ) : isLoading ? (
+        <LoadingBlock />
       ) : (
         <div
           className="flex justify-center items-center flex-col w-[81px] h-[104px] bg-[#FDF397] border border-black rounded-lg drop-shadow-md 

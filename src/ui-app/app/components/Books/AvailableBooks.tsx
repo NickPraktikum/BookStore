@@ -7,9 +7,10 @@ import ScrollBar from "../ScrollBar";
 import { IBookModel } from "../../interfaces/IBookModel";
 import { useQuery } from "@tanstack/react-query";
 import ErrorBlock from "../ErrorBlock";
+import LoadingBlock from "../LoadingBlock";
 
 const AvailableBooks: FunctionComponent<IBooksElement> = ({ text }) => {
-  const { data, error, isError } = useQuery<IBookModel[], Error>({
+  const { data, error, isError, isLoading } = useQuery<IBookModel[], Error>({
     queryKey: ["available-books"],
     queryFn: FetchAvailableBooks,
     refetchInterval: 180000,
@@ -18,6 +19,8 @@ const AvailableBooks: FunctionComponent<IBooksElement> = ({ text }) => {
     <>
       {isError ? (
         <ErrorBlock errorMessage={error.message} />
+      ) : isLoading ? (
+        <LoadingBlock />
       ) : (
         <div>
           <ScrollBar text={text} />
