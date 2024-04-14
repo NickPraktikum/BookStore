@@ -1,4 +1,3 @@
-"use client";
 import { FunctionComponent } from "react";
 import { IError } from "../interfaces/IError";
 import Link from "next/link";
@@ -27,7 +26,7 @@ const ErrorBlockSingle: FunctionComponent<IErrorSingle> = ({
             }
           >
             <button className="bg-white p-2 rounded-lg m-2 text-sm">
-              Reload
+              Go Home
             </button>
           </Link>
         </div>
