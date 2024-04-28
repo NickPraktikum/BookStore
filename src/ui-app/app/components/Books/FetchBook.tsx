@@ -14,7 +14,6 @@ const FetchBook: FunctionComponent<IFetchBook> = ({ bookId }) => {
     queryFn: () => FetchBookById(bookId),
     refetchInterval: 180000,
   });
-  console.log(error?.message);
   return (
     <>
       {isError ? (

@@ -17,6 +17,8 @@
         public void Configure(EntityTypeBuilder<AuthorEntity> builder)
         {
             builder.HasQueryFilter(q => q.IsDeleted == false);
+            builder.Navigation(author => author.Books)
+                .AutoInclude();
 
         }
 

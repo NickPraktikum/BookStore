@@ -28,7 +28,6 @@
             await _context.Authors.AddAsync(author);
             await _context.SaveChangesAsync();
             authorModel.Id = author.Id;
-            authorModel.Books = null!;
             return authorModel;
         }
 
@@ -40,7 +39,6 @@
             await _context.Books.AddAsync(book);
             await _context.SaveChangesAsync();
             var bookModel = _mapper.Map<BookModel>(book);
-            bookModel!.Author!.Books = null!;
             return bookModel;
         }
 
@@ -70,17 +68,13 @@
         {
             var authorEntities = await _context.Authors.ToArrayAsync();
             var authorModels = _mapper.Map<AuthorModel[]>(authorEntities);
-            foreach (var author in authorModels)
-            {
-                author.Books = null!;
-            }
             return authorModels;
         }
 
         /// <inheritdoc/>
         public async Task<BookModel[]?> GetAllAvailableBooksAsync()
         {
-            var bookEntities = await _context.Set<BookEntity>().Include(a => a.Author!.Books).ToArrayAsync();
+            var bookEntities = await _context.Set<BookEntity>().Include(book => book.Author).ToArrayAsync();
             var bookModels = _mapper.Map<BookModel[]>(bookEntities);
             return bookModels;
         }
@@ -96,15 +90,8 @@
         /// <inheritdoc/>
         public async Task<BookModel[]?> GetAllDeletedBooksAsync()
         {
-            var booksEntities = await _context.Books.IgnoreQueryFilters().Where((book) => book.IsDeleted == true).ToArrayAsync();
+            var booksEntities = await _context.Books.IgnoreQueryFilters().Where((book) => book.IsDeleted == true).IgnoreQueryFilters().Include(book => book.Author).ToArrayAsync();
             var bookModels = _mapper.Map<BookModel[]>(booksEntities);
-            foreach (var book in bookModels)
-            {
-                if (book.Author != null)
-                {
-                    book.Author.Books = null!;
-                }
-            }
             return bookModels;
         }
 
@@ -132,19 +119,17 @@
             book.Description = model.Description;
             await _context.SaveChangesAsync();
             var bookModel = _mapper.Map<BookModel>(book);
-            bookModel!.Author!.Books = null!;
             return bookModel;
         }
 
         /// <inheritdoc/>
         public async Task<BookEntity> GetBookByIdAsync(long id)
         {
-            var book = await _context.Books.FirstOrDefaultAsync(book => book.Id == id);
+            var book = await _context.Books.Include(book => book.Author).FirstOrDefaultAsync(book => book.Id == id);
             if (book == null)
             {
                 throw new EntityNotFoundException("Such book doesn't exist");
             }
-            book!.Author!.Books = null!;
             return book;
         }
 

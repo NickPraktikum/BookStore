@@ -48,8 +48,10 @@
                 var bookChangeTime = bookChangedOn.LastOrDefault();
                 var book = await _context.Books
                     .TemporalAsOf(bookChangeTime.AddMilliseconds(-1)).IgnoreQueryFilters().Where(book => book.Id == id).FirstOrDefaultAsync();
+                var author = await _context.Authors
+                    .TemporalAsOf(bookChangeTime.AddMilliseconds(-1)).IgnoreQueryFilters().Where(author => author.Id == book!.AuthorId).FirstOrDefaultAsync();
+                book!.Author = author;
                 var bookModel = _mapper.Map<BookModel>(book);
-                bookModel!.Author!.Books = null!;
                 return bookModel;
             }
         }
