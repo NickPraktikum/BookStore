@@ -19,7 +19,7 @@ export default async function Deleted() {
         <h3 className="font-bold text-[20px]">Books</h3>
       </div>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <DeletedBooks text="Deleted authors" />
+        <DeletedBooks text="Deleted books" />
       </HydrationBoundary>
     </main>
   );
