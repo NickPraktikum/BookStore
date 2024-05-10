@@ -56,6 +56,11 @@
                     "Value cannot be null or whitespace.",
                     nameof(model.Isbn));
             }
+            var bookIsbnCheck = (await GetAllAvailableBooksAsync())!.FirstOrDefault(book => book.Isbn == model.Isbn);
+            if (bookIsbnCheck != null)
+            {
+                throw new InvalidOperationException("The provided ISBN already exists!");
+            }
             var author = await GetAuthorByIdAsync(model.AuthorId);
             return await _repository.CreateBookAsync(model, author);
         }
@@ -146,6 +151,11 @@
                 throw new ArgumentException(
                     "Value cannot be null or whitespace.",
                     nameof(model.Isbn));
+            }
+            var bookIsbnCheck = (await GetAllAvailableBooksAsync())!.FirstOrDefault(book => book.Isbn == model.Isbn);
+            if (bookIsbnCheck != null)
+            {
+                throw new InvalidOperationException("The provided ISBN already exists!");
             }
             var author = await GetAuthorByIdAsync(model.AuthorId);
             return await _repository.UpdateBookAsync(id, model, author!);
