@@ -1,7 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-
+// The method that fetches all deleted authors.
 export async function FetchDeletedAuthors() {
-  return await fetch("https://localhost:5001/api/v1/Author/Deleted")
+  return await fetch("https://localhost:5001/api/v1/Author/Deleted", {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
     .then(async (res) => {
       if (res.ok) {
         return await res.json();

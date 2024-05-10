@@ -1,3 +1,4 @@
+// The interface for Link elements in the menu.
 export interface ILinkElement {
   selected: boolean;
   text: string;

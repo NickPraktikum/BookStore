@@ -1,3 +1,4 @@
+// The block to display all available books.
 "use client";
 import { FunctionComponent } from "react";
 import { FetchAvailableBooks } from "../../functions/FetchAvailableBooks";

@@ -1,3 +1,4 @@
+// The block to display a single books with react-query.
 "use client";
 import { FunctionComponent } from "react";
 import { IBookModel } from "../../interfaces/IBookModel";

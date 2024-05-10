@@ -1,3 +1,4 @@
+// The block to display a single author by version.
 "use client";
 import { FunctionComponent } from "react";
 import { IBookModel } from "../../interfaces/IBookModel";

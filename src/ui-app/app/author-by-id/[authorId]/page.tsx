@@ -1,3 +1,4 @@
+// The page for the author search by his id.
 import FetchAuthor from "@/app/components/Authors/FetchAuthor";
 import SearchFormBlocks from "@/app/components/SearchFormBlocks";
 import { FetchAuthorById } from "@/app/functions/FetchAuthorById";

@@ -1,5 +1,12 @@
+// The method that fetches all deleted books.
 export async function FetchDeletedBooks() {
-  return await fetch("https://localhost:5001/api/v1/Book/Deleted")
+  return await fetch("https://localhost:5001/api/v1/Book/Deleted", {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
     .then(async (res) => {
       if (res.ok) {
         return await res.json();

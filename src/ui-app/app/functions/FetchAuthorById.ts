@@ -1,5 +1,12 @@
+// The method that fetches a book by his id.
 export async function FetchAuthorById(id: string) {
-  return await fetch(`https://localhost:5001/api/v1/Author/${id}`)
+  return await fetch(`https://localhost:5001/api/v1/Author/${id}`, {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
     .then(async (res) => {
       if (res.ok) {
         return await res.json();

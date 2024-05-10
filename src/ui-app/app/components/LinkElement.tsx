@@ -1,3 +1,4 @@
+// The Link element for the navigation bar
 "use client";
 import Link from "next/link";
 import { FunctionComponent } from "react";

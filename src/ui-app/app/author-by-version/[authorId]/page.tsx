@@ -1,4 +1,4 @@
-import Author from "@/app/components/Authors/Author";
+// The page for the author search by his id.
 import FetchAuthor from "@/app/components/Authors/FetchAuthor";
 import SearchFormVersionBlocks from "@/app/components/SearchFormVersionBlocks";
 import { FetchAuthorById } from "@/app/functions/FetchAuthorById";

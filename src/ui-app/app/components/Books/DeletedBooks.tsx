@@ -1,3 +1,4 @@
+// The block to display all deleted books.
 "use client";
 import { FunctionComponent } from "react";
 import Book from "./Book";

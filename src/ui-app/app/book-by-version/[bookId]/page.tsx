@@ -1,8 +1,7 @@
-import Book from "@/app/components/Books/Book";
+// The page for the book search by its id.
 import FetchBook from "@/app/components/Books/FetchBook";
 import SearchFormVersionBlocks from "@/app/components/SearchFormVersionBlocks";
 import { FetchBookById } from "@/app/functions/FetchBookById";
-import { IBookModel } from "@/app/interfaces/IBookModel";
 import {
   HydrationBoundary,
   QueryClient,

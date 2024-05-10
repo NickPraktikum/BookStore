@@ -1,3 +1,4 @@
+// The loading block for the fetching functions.
 import { FunctionComponent } from "react";
 
 const LoadingBlock: FunctionComponent = () => {

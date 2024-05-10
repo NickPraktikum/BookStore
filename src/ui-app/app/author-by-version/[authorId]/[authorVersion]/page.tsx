@@ -1,3 +1,4 @@
+// The page for the author search by his id and version.
 import FetchAuthorVersionBlock from "@/app/components/Authors/FetchAuthorVersion";
 import SearchFormVersionBlocks from "@/app/components/SearchFormVersionBlocks";
 import { FetchAuthorVersion } from "@/app/functions/FetchAuthorVersion";

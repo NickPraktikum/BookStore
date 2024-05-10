@@ -1,3 +1,4 @@
+// The page for deleted books retrieval.
 import {
   HydrationBoundary,
   QueryClient,

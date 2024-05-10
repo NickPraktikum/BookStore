@@ -1,3 +1,4 @@
+// The method that fetches all available authors.
 export async function FetchAvailableAuthors() {
   return await fetch("https://localhost:5001/api/v1/Author/Available", {
     method: "GET",

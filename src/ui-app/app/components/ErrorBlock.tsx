@@ -1,3 +1,4 @@
+// The error block.
 "use client";
 import { FunctionComponent } from "react";
 import { IError } from "../interfaces/IError";

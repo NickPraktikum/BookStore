@@ -1,8 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-import { IBookModel } from "../interfaces/IBookModel";
-
+// The method that fetches a book by its version and id.
 export async function FetchBookVersion(id: string, version: string) {
-  return await fetch(`https://localhost:5001/api/v1/Book/${id}/${version}`)
+  return await fetch(`https://localhost:5001/api/v1/Book/${id}/${version}`, {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
     .then(async (res) => {
       if (res.ok) {
         return await res.json();

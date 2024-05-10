@@ -1,3 +1,4 @@
+// The error single block.
 import { FunctionComponent } from "react";
 import { IError } from "../interfaces/IError";
 import Link from "next/link";

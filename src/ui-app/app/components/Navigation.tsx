@@ -1,3 +1,4 @@
+// The UI's navigation bar.
 "use client";
 import { FunctionComponent } from "react";
 import LinkElement from "./LinkElement";

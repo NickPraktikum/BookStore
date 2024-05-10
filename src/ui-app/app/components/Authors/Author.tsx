@@ -1,3 +1,4 @@
+// The block to display a single author
 import { FunctionComponent } from "react";
 
 const Author: FunctionComponent<IAuthorModel> = ({

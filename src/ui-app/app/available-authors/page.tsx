@@ -1,3 +1,4 @@
+// The page for available authors retrieval.
 import {
   HydrationBoundary,
   QueryClient,
@@ -6,7 +7,7 @@ import {
 import AvailableAuthors from "../components/Authors/AvailableAuthors";
 import { FetchAvailableAuthors } from "../functions/FetchAvailableAuthors";
 
-export default async function Deleted() {
+export default async function Page() {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey: ["available-authors"],

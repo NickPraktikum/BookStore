@@ -1,5 +1,12 @@
+// The method that fetches an author by his version and id.
 export async function FetchAuthorVersion(id: string, version: string) {
-  return await fetch(`https://localhost:5001/api/v1/Author/${id}/${version}`)
+  return await fetch(`https://localhost:5001/api/v1/Author/${id}/${version}`, {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
     .then(async (res) => {
       if (res.ok) {
         return await res.json();

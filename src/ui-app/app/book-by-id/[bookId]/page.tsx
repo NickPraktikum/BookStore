@@ -1,16 +1,14 @@
-import Book from "@/app/components/Books/Book";
+// The page for the book search by its id.
 import FetchBook from "@/app/components/Books/FetchBook";
 import SearchFormBlocks from "@/app/components/SearchFormBlocks";
 import { FetchBookById } from "@/app/functions/FetchBookById";
-import { IBookModel } from "@/app/interfaces/IBookModel";
 import {
   HydrationBoundary,
   QueryClient,
   dehydrate,
 } from "@tanstack/react-query";
-import Link from "next/link";
 
-export default async function Deleted({
+export default async function Page({
   params: { bookId },
 }: {
   params: { bookId: string };

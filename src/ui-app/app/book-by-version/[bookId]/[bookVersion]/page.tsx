@@ -1,3 +1,4 @@
+// The page for book search by its id and version.
 import FetchBookVersionBlock from "@/app/components/Books/FetchBookVersion";
 import SearchFormVersionBlocks from "@/app/components/SearchFormVersionBlocks";
 import { FetchBookVersion } from "@/app/functions/FetchBookVersion";

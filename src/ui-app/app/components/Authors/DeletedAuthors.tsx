@@ -1,3 +1,4 @@
+// The block to display all deleted authors.
 "use client";
 import { FunctionComponent } from "react";
 import { IAuthorsElement } from "../../interfaces/IAuthorsElement";

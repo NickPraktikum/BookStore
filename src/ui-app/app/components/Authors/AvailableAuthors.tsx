@@ -1,3 +1,4 @@
+// The block to display all available authors.
 "use client";
 import { FunctionComponent } from "react";
 import { IAuthorsElement } from "../../interfaces/IAuthorsElement";

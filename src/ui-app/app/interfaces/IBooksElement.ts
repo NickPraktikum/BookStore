@@ -1,5 +1,4 @@
-import { IBookModel } from "./IBookModel";
-
+// The interface for book's element block.
 export interface IBooksElement {
   text: string;
 }

@@ -1,4 +1,4 @@
-import { revalidatePath } from "next/cache";
+// The page for deleted authors retrieval.
 import {
   HydrationBoundary,
   QueryClient,

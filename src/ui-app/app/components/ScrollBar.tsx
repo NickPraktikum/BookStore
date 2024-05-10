@@ -1,3 +1,4 @@
+// The scroll bar for the models
 "use client";
 
 import { FunctionComponent } from "react";
