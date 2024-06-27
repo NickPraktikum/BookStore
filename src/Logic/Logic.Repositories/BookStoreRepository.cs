@@ -74,7 +74,7 @@
         /// <inheritdoc/>
         public async Task<BookModel[]?> GetAllAvailableBooksAsync()
         {
-            var bookEntities = await _context.Set<BookEntity>().Include(book => book.Author).ToArrayAsync();
+            var bookEntities = await _context.Books.ToArrayAsync();
             var bookModels = _mapper.Map<BookModel[]>(bookEntities);
             return bookModels;
         }
@@ -90,7 +90,7 @@
         /// <inheritdoc/>
         public async Task<BookModel[]?> GetAllDeletedBooksAsync()
         {
-            var booksEntities = await _context.Books.IgnoreQueryFilters().Where((book) => book.IsDeleted == true).IgnoreQueryFilters().Include(book => book.Author).ToArrayAsync();
+            var booksEntities = await _context.Books.IgnoreQueryFilters().Where((book) => book.IsDeleted == true).ToArrayAsync();
             var bookModels = _mapper.Map<BookModel[]>(booksEntities);
             return bookModels;
         }
