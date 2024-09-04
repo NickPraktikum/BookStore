@@ -26,11 +26,8 @@
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.AddInterceptors(new SoftDeleteInterceptor());
-                optionsBuilder.AddInterceptors(new UpdateVersionInterceptor());
-            }
+            optionsBuilder.AddInterceptors(new SoftDeleteInterceptor());
+            optionsBuilder.AddInterceptors(new UpdateVersionInterceptor());
         }
 
         /// <inheritdoc />

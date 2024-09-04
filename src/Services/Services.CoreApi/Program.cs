@@ -63,8 +63,6 @@ builder.Services.AddDbContext<BookStoreContext>(
     {
         var configuration = services.GetRequiredService<IConfiguration>();
         var connectionString = configuration.GetConnectionString("Library");
-        options.AddInterceptors(new SoftDeleteInterceptor())
-            .AddInterceptors(new UpdateVersionInterceptor());
         options.UseSqlServer(
             connectionString,
             sqlServerOptions =>
