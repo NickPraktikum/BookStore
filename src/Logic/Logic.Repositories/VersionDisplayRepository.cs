@@ -6,6 +6,8 @@
     using devdeer.BookStore.Logic.Interfaces;
     using devdeer.BookStore.Logic.Models;
     using Microsoft.EntityFrameworkCore;
+    using System.ComponentModel.DataAnnotations;
+
     public class VersionDisplayRepository : IVersionDisplayRepository
     {
         private readonly BookStoreContext _context;
@@ -18,18 +20,22 @@
         /// <inheritdoc/>
         public async Task<AuthorModel> GetAuthorByVersionAsync(long id, int version)
         {
-            var authorChangedOn = await _context.Authors
-                .TemporalAll().IgnoreQueryFilters().Where(author => author.Id == id).OrderBy(author => EF.Property<DateTime>(author, "AuthorRemoval")).Where(author => author.Version == version).Select(author => EF.Property<DateTime>(author, "AuthorRemoval")).ToListAsync();
-            if (authorChangedOn.Count == 0)
+            var authorInfo = await _context.Authors.TemporalAll().IgnoreAutoIncludes().IgnoreQueryFilters().Where(author => author.Id == id && author.Version == version).Select(author =>
+            new {
+                Author = author,
+                AuthorCreation = EF.Property<DateTime>(author, "AuthorCreation"),
+                AuthorRemoval = EF.Property<DateTime>(author, "AuthorRemoval")
+            }).FirstOrDefaultAsync();
+            if (authorInfo == null)
             {
                 throw new EntityNotFoundException("Such author wasn't found!");
             }
             else
             {
-                var authorChangeTime = authorChangedOn.LastOrDefault();
-                var authorAndBooks = await _context.Authors
-            .TemporalAsOf(authorChangeTime.AddMilliseconds(-1)).IgnoreQueryFilters().Where(author => author.Id == id).FirstOrDefaultAsync();
-                var authorModels = _mapper.Map<AuthorModel>(authorAndBooks);
+                var author = authorInfo.Author;
+                var authorVersion = await _context.Authors
+            .TemporalAsOf(authorInfo.AuthorRemoval.AddMilliseconds(-1)).IgnoreQueryFilters().Where(author => author.Id == id).FirstOrDefaultAsync();
+                var authorModels = _mapper.Map<AuthorModel>(authorVersion);
                 return authorModels!;
             }
         }
@@ -37,19 +43,21 @@
         /// <inheritdoc/>
         public async Task<BookModel> GetBookByVersionAsync(long id, int version)
         {
-            var bookChangedOn = await _context.Books
-                .TemporalAll().IgnoreQueryFilters().Where(book => book.Id == id).OrderBy(book => EF.Property<DateTime>(book, "BookRemoval")).Where(book => book.Version == version).Select(book => EF.Property<DateTime>(book, "BookRemoval")).ToListAsync();
-            if (bookChangedOn.Count == 0)
+            var bookInfo = await _context.Books.TemporalAll().IgnoreQueryFilters().Where(book => book.Id == id &&  book.Version == version).Select(book =>
+            new {
+                Book = book,
+                BookCreation = EF.Property<DateTime>(book, "BookCreation"),
+                BookRemoval = EF.Property<DateTime>(book, "BookRemoval")
+            }).FirstOrDefaultAsync();
+            if (bookInfo == null)
             {
                 throw new EntityNotFoundException("Such book wasn't found!");
             }
             else
             {
-                var bookChangeTime = bookChangedOn.LastOrDefault();
-                var book = await _context.Books
-                    .TemporalAsOf(bookChangeTime.AddMilliseconds(-1)).IgnoreQueryFilters().Where(book => book.Id == id).FirstOrDefaultAsync();
+                var book = bookInfo!.Book;
                 var author = await _context.Authors
-                    .TemporalAsOf(bookChangeTime.AddMilliseconds(-1)).IgnoreQueryFilters().Where(author => author.Id == book!.AuthorId).FirstOrDefaultAsync();
+                    .TemporalAsOf(bookInfo.BookRemoval.AddMilliseconds(-1)).IgnoreQueryFilters().Where(author => author.Id == book.AuthorId).FirstOrDefaultAsync();
                 book!.Author = author;
                 var bookModel = _mapper.Map<BookModel>(book);
                 return bookModel;
