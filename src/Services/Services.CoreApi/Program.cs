@@ -54,8 +54,8 @@ builder.Services.AddSwaggerGen(
         options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
     });
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IBookStoreRepository, BookStoreRepository>();
 builder.Services.AddTransient<IBookStoreLogic, BookStoreLogic>();
-builder.Services.AddTransient<IBookStoreRepository, BookStoreRepository>();
 builder.Services.AddTransient<IVersionDisplayRepository, VersionDisplayRepository>();
 builder.Services.AddTransient<ErrorMiddleware>();
 builder.Services.AddDbContext<BookStoreContext>(
