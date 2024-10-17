@@ -1,13 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
-using TemporalTable.Configurations;
 using TemporalTable.Data;
-using TemporalTable.Interceptors;
 using TemporalTable.Models;
 
 // create a hosted app and run it
@@ -50,6 +46,8 @@ class MyApp
 
     public async Task StartAsync()
     {
-        var bookHistory = await _context.Books.TemporalAll().ToListAsync();
+        var book = new BookEntity { AuthorId = 2, Title = "SampleBook", Isbn = "uniqueIsbn", Pages = 400, Price = 20.25f };
+        await _context.Books.AddAsync(book);
+        await _context.SaveChangesAsync();
     }
 }

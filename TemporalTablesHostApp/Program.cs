@@ -9,7 +9,6 @@ using TemporalTablesHostApp.Data;
 var builder = Host.CreateDefaultBuilder(args)
     .ConfigureServices((hostContext, services) =>
     {
-        // TODO add your service dependencies here
         services.AddTransient<App>();
         services.AddDbContext<BookContext>(
             (s, b) =>
